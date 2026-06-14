@@ -68,9 +68,7 @@ Processor Hardware
               ▼
 Transistor-Level Switching
 ```
-
 ---
-
 ## Role of Each Layer
 
 ### High-Level Programming Languages
@@ -104,7 +102,6 @@ Major compiler responsibilities include:
 ### Assembly Language
 
 Assembly language provides a symbolic representation of machine instructions, making processor operations easier for humans to understand and debug.
-
 Example:
 
 ```assembly
@@ -149,7 +146,6 @@ It defines:
 The ISA ensures that software developed for a particular architecture can execute correctly on any processor implementing that architecture.
 
 ---
-
 ## Importance in VLSI Design
 
 From a VLSI perspective, the RTL and physical circuits designed by hardware engineers must faithfully implement the ISA specification.
@@ -159,8 +155,4 @@ Any design flaw at the hardware level can propagate through higher abstraction l
 Understanding this hierarchy is therefore essential before studying the RTL-to-GDSII design flow, as it establishes the connection between software applications and silicon implementation.
 
 ---
-
-### Key Takeaway
-
-The abstraction hierarchy enables software developers and hardware designers to work independently while maintaining compatibility through the Instruction Set Architecture (ISA), which serves as the bridge between both domains.
 
