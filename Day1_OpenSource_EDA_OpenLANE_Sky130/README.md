@@ -539,10 +539,10 @@ During this stage, OpenLANE:
 
 This step acts as the foundation for all subsequent design stages.
 <p align="center">
-  <img src="images/picorv32_Flow.png" width="700">
+  <img src="images/Picorv32_Flow.png" width="700">
 </p>
 
-<p align="center"><b>Figure 5:</b> picorv32_Flow IPs</p>
+<p align="center"><b>Figure 5:</b> Picorv32_Flow IPs</p>
 
 ### Running Synthesis
 
@@ -552,7 +552,7 @@ After preparation, synthesis was executed using:
 run_synthesis
 ```
 <p align="center">
-  <img src="images/prep_design_synthesis.png" width="700">
+  <img src="images/prep_design_synthesis.jpeg" width="700">
 </p>
 
 <p align="center"><b>Figure 6:</b> prep_design_synthesis IPs</p>
