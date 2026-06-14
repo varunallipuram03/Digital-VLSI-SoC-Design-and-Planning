@@ -31,7 +31,7 @@ VSD OpenLANE SKY130 Workshop
 11. Key Learnings
 
 ---
-# 1️⃣ Understanding Computer Abstraction Layers
+# 1️. Understanding Computer Abstraction Layers
 
 ## Why Do We Need Abstraction?
 
@@ -69,7 +69,7 @@ The ISA is the fundamental interface between software and hardware. As VLSI engi
 </p>
 <p align="center"><b>Figure 1:</b> Software to Hardware Flow</p>
 
-## 2️⃣. Chip Anatomy – Understanding the Building Blocks of a Chip
+## 2️. Chip Anatomy – Understanding the Building Blocks of a Chip
 
 Before learning the OpenLANE flow, it is important to understand what actually exists inside a semiconductor chip.
 
@@ -162,8 +162,8 @@ From this section, I learned that a complete chip is a combination of several sm
 </p>
 
 <p align="center"><b>Figure 2:</b> SoC Architecture Showing Macros and Foundry IPs</p>
-## 3. RISC-V and the ISA Bridge
 
+## 3. RISC-V and the ISA Bridge
 ### What is RISC-V?
 
 RISC-V is an open-source Instruction Set Architecture (ISA) developed at UC Berkeley. Unlike proprietary architectures, it can be used and modified freely, making it popular in academia, research, and industry.
@@ -223,6 +223,7 @@ Each stage transforms the design into a lower-level representation until it beco
 ### Key Learning
 
 A mistake at any stage of this flow can affect the final chip. Understanding the complete path helps in debugging and developing reliable hardware systems.
+
 ## 5. Open-Source ASIC Design Ecosystem
 
 Traditional ASIC development relied heavily on expensive commercial tools and proprietary process technologies. The open-source hardware movement has changed this by providing accessible design resources.
@@ -343,12 +344,9 @@ OpenLANE is an open-source digital ASIC implementation flow developed by eFables
 The main purpose of OpenLANE is to automate the chip design process and reduce manual intervention during physical design.
 
 ### OpenLANE Flow
-
-![OpenLANE Flow](images/OpenLANE_ASIC_Flow.png)
 <p align="center">
   <img src="images/OpenLANE_ASIC_Flow.png" width="700">
 </p>
-
 <p align="center"><b>Figure 4:</b> OpenLANE Flow IPs</p>
 
 The flow starts with RTL and gradually converts the design into a manufacturable GDSII layout.
@@ -540,6 +538,11 @@ During this stage, OpenLANE:
 * Initializes logs, reports, and result folders
 
 This step acts as the foundation for all subsequent design stages.
+<p align="center">
+  <img src="images/picorv32_Flow.png" width="700">
+</p>
+
+<p align="center"><b>Figure 5:</b> picorv32_Flow IPs</p>
 
 ### Running Synthesis
 
@@ -548,6 +551,11 @@ After preparation, synthesis was executed using:
 ```tcl
 run_synthesis
 ```
+<p align="center">
+  <img src="images/prep_design_synthesis.png" width="700">
+</p>
+
+<p align="center"><b>Figure 6:</b> prep_design_synthesis IPs</p>
 
 During synthesis:
 
@@ -576,3 +584,127 @@ These reports are later used to evaluate design quality before proceeding to flo
 ### Learning Outcome
 
 This lab helped me understand how OpenLANE organizes a complete ASIC project and how RTL code is converted into a technology-mapped netlist. It also provided practical exposure to Docker-based EDA environments, OpenLANE commands, and synthesis report generation.
+
+# 10. Synthesis Results and Analysis
+
+After running synthesis on the PicoRV32A design, I examined the generated reports to understand the hardware complexity and resource utilization.
+
+### Synthesis Summary
+
+| Parameter    | Value  |
+| ------------ | ------ |
+| Total Wires  | 17,043 |
+| Wire Bits    | 17,475 |
+| Total Cells  | 17,323 |
+| D Flip-Flops | 1,614  |
+
+### DFF Percentage
+
+The percentage of flip-flops in the design can be calculated as:
+
+```text
+DFF Percentage = (1614 / 17323) × 100
+               = 9.32%
+```
+
+This indicates that the processor contains a balanced combination of combinational and sequential logic, which is expected for a RISC-V CPU design.
+
+### Observations
+
+* The design contains more combinational logic compared to storage elements.
+* A significant number of cells are used for instruction decoding, arithmetic operations, and control logic.
+* The synthesis reports provide useful information about area utilization and timing before moving to the physical design stages.
+
+### Important Reports Generated
+
+* Area Report
+* Timing Report
+* Cell Utilization Report
+* Synthesis Statistics Report
+
+These reports help in evaluating the quality of synthesis before floorplanning and placement.
+
+---
+
+# 11. Challenges Faced During Day 1
+
+During the initial setup and execution, I encountered a few common issues.
+
+### Command Case Sensitivity
+
+Linux commands are case-sensitive. Commands such as `CD` and `LS` generated errors because the correct commands are `cd` and `ls`.
+
+### Docker Environment Issues
+
+Initially, the required OpenLANE image was not available locally. Pulling the correct Docker image resolved the issue.
+
+### Running OpenLANE Outside Docker
+
+Some commands failed because OpenLANE tools were executed outside the container environment. Running everything inside Docker fixed the problem.
+
+### Design Preparation Error
+
+An incorrect `prep` command caused configuration errors. Using:
+
+```tcl
+prep -design picorv32a
+```
+
+resolved the issue.
+
+---
+
+# 12. Quick Interview Questions
+
+### What is a PDK?
+
+A PDK (Process Design Kit) contains all technology files, design rules, libraries, and models required to design a chip for a specific fabrication process.
+
+### What is OpenLANE?
+
+OpenLANE is an open-source RTL-to-GDSII flow that automates ASIC design using multiple open-source EDA tools.
+
+### Why is synthesis important?
+
+Synthesis converts RTL code into a gate-level representation that can be physically implemented on silicon.
+
+### What is PicoRV32A?
+
+PicoRV32A is a lightweight open-source RISC-V processor commonly used as a reference design in OpenLANE tutorials and workshops.
+
+### What is STA?
+
+Static Timing Analysis (STA) is used to verify whether timing requirements are satisfied without running functional simulations.
+
+### What is a Clean GDSII?
+
+A clean GDSII is a layout that passes DRC, LVS, and timing verification checks before fabrication.
+
+---
+
+# 13. Key Takeaways from Day 1
+
+Day 1 provided a solid introduction to the open-source ASIC design ecosystem. I learned how software instructions eventually become hardware implementations, understood the importance of the SKY130 PDK, and explored the OpenLANE design flow.
+
+### Skills Gained
+
+* Understanding ASIC design fundamentals
+* Working with Docker-based OpenLANE setup
+* Preparing a design for implementation
+* Running synthesis on a RISC-V processor
+* Reading synthesis reports and statistics
+* Understanding the overall RTL-to-GDSII flow
+
+### Day 1 Status
+
+| Activity            | Status |
+| ------------------- | ------ |
+| OpenLANE Setup      | ✅      |
+| Docker Environment  | ✅      |
+| Design Preparation  | ✅      |
+| Synthesis Execution | ✅      |
+| Report Analysis     | ✅      |
+
+### Looking Ahead
+
+The next stage focuses on **Floorplanning**, where the chip area, macro placement, power planning, and utilization parameters are explored before placement and routing.
