@@ -9,10 +9,11 @@ The workshop focuses on understanding the complete ASIC RTL-to-GDSII flow using 
 ---
 
 ## 👨‍💻 Author
-
-**Varun Venkata**
-
-Electronics and Communication Engineering
+Author: Varun Venkata Allipuram
+Platform: GitHub Codespaces
+PDK: SKY130A
+OpenLane Version: v1.0.2
+Workshop: VSD OpenLane Sky130 Workshop
 
 ---
 
