@@ -66,48 +66,93 @@ Transistor Switching
   <img src="images/software_to_hardware_flow.png" width="700">
 </p>
 
+## 2. Chip Anatomy – Understanding the Building Blocks of a Chip
+
+Before learning the OpenLANE flow, it is important to understand what actually exists inside a semiconductor chip.
+
+A chip is not just a small black component that we see on a PCB. Internally, it consists of a silicon die enclosed inside a package. The package protects the die and provides electrical connections to the external world.
+
+### Chip Structure
+
+**Chip = Die + Package**
+
+### Package
+
+The package acts as the outer covering of the chip. It performs multiple functions:
+
+* Protects the silicon die from physical damage.
+* Provides connections between the chip and the PCB.
+* Helps in dissipating the heat generated during operation.
+
+One commonly used package type is **QFN (Quad Flat No-Lead)**, which offers compact size and good thermal performance.
+
+### Die
+
+The die is the actual silicon portion where all electronic circuits are fabricated.
+
+Inside the die we can find:
+
+* Core Region
+* I/O Cells
+* Memory Blocks
+* Analog and Digital IPs
+
+The die is manufactured on a silicon wafer and later separated into individual chips through a process called dicing.
+
+### Core
+
+The core is the working area of the chip where most computations take place.
+
+It generally contains:
+
+* Standard Cells
+* Sequential Elements (Flip-Flops)
+* SRAM Blocks
+* Processor Logic
+* Custom Macros
+
+This is the region where the actual functionality of the design is implemented.
+
+### Pads
+
+Pads form the interface between the internal circuitry and the outside world.
+
+Common pad types include:
+
+* Power Pads (VDD, VSS)
+* Input Pads
+* Output Pads
+* Bidirectional Pads
+* Analog Pads
+
+These pads are arranged around the chip boundary and connect to the package pins.
+
+### Macros and IP Blocks
+
+Modern chips are built using reusable blocks instead of designing everything from scratch.
+
+Some examples include:
+
+* SRAM
+* UART
+* SPI
+* ADC
+* PLL
+* Processor Cores
+
+These reusable blocks are known as Intellectual Property (IP) blocks.
+
+IPs are generally categorized as:
+
+| IP Type | Description                                                         |
+| ------- | ------------------------------------------------------------------- |
+| Soft IP | Provided as RTL and can be synthesized for different technologies   |
+| Hard IP | Delivered as a fixed layout and optimized for a specific technology |
+| Firm IP | Intermediate form with some flexibility in implementation           |
+
+### My Understanding
+
+From this section, I learned that a complete chip is a combination of several smaller functional blocks working together. The processor is only one part of the system; memories, I/O interfaces, analog circuits, and foundry-provided IPs are equally important in building a complete SoC.
+
 <p align="center"><b>Figure 1:</b> Software to Hardware Flow</p>
-
-# 2️⃣ Chip Components, Macros and Foundry IPs
-
-## Overview
-
-The figure below shows the internal organization of a System-on-Chip (SoC) along with its major building blocks. A modern chip consists of reusable digital and analog blocks integrated inside a single silicon die.
-
-<p align="center">
-  <img src="images/soc_macros_foundry_ips.png" width="700">
-</p>
-
-<p align="center"><b>Figure 2:</b> SoC Architecture Showing Macros and Foundry IPs</p>
-
-## Major Components
-
-### Macros
-
-Macros are large functional blocks that perform specific operations inside the chip. These blocks are generally reused across multiple designs.
-
-Examples shown in the figure:
-
-- RISC-V SoC Core
-- GPIO Bank
-- SRAM Memory
-- SPI Interface
-
-### Foundry IPs
-
-Foundry IPs are pre-designed and pre-verified blocks supplied by the semiconductor foundry. These blocks are technology-dependent and optimized for the manufacturing process.
-
-Examples shown in the figure:
-
-- ADC (Analog-to-Digital Converter)
-- PLL (Phase-Locked Loop)
-- Analog Interfaces
-- Power Management Blocks
-
-## Importance of Macros and IPs
-
-- Reduce design time and development cost.
-- Improve reliability through proven designs.
-- Simplify complex SoC integration.
-- Enable faster time-to-market.
 
