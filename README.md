@@ -1,5 +1,3 @@
-# Digital-VLSI-SoC-Design-and-Planning
-Documentation of VSD OpenLANE SKY130 Workshop
 # 🚀 Digital VLSI SoC Design and Planning
 
 ## VSD OpenLANE SKY130 Workshop Documentation
