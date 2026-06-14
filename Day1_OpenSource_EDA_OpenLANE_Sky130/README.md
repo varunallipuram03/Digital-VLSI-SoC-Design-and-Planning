@@ -62,10 +62,52 @@ Transistor Switching
 * **Machine Code:** Binary instructions executed directly by the processor.
 * **ISA (Instruction Set Architecture):** Acts as a bridge between software and hardware by defining instructions, registers, and memory operations.
 
-## Key Learning
-The ISA is the fundamental interface between software and hardware. As VLSI engineers, our responsibility is to design hardware that correctly implements the ISA specifications.
 <p align="center">
   <img src="images/software_to_hardware_flow.png" width="700">
 </p>
 
 <p align="center"><b>Figure 1:</b> Software to Hardware Flow</p>
+
+# 2️⃣ Chip Components, Macros and Foundry IPs
+
+## Overview
+
+The figure below shows the internal organization of a System-on-Chip (SoC) along with its major building blocks. A modern chip consists of reusable digital and analog blocks integrated inside a single silicon die.
+
+<p align="center">
+  <img src="images/soc_macros_foundry_ips.png" width="700">
+</p>
+
+<p align="center"><b>Figure 2:</b> SoC Architecture Showing Macros and Foundry IPs</p>
+
+## Major Components
+
+### Macros
+
+Macros are large functional blocks that perform specific operations inside the chip. These blocks are generally reused across multiple designs.
+
+Examples shown in the figure:
+
+- RISC-V SoC Core
+- GPIO Bank
+- SRAM Memory
+- SPI Interface
+
+### Foundry IPs
+
+Foundry IPs are pre-designed and pre-verified blocks supplied by the semiconductor foundry. These blocks are technology-dependent and optimized for the manufacturing process.
+
+Examples shown in the figure:
+
+- ADC (Analog-to-Digital Converter)
+- PLL (Phase-Locked Loop)
+- Analog Interfaces
+- Power Management Blocks
+
+## Importance of Macros and IPs
+
+- Reduce design time and development cost.
+- Improve reliability through proven designs.
+- Simplify complex SoC integration.
+- Enable faster time-to-market.
+
