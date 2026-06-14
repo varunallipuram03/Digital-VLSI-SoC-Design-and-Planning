@@ -2,7 +2,7 @@
 ## Inception of Open-Source EDA, OpenLANE and SKY130 PDK
 
 ### Author
-**Varun Venkata**
+**Varun Venkata Allipuram**
 
 ### Workshop
 VSD OpenLANE SKY130 Workshop
