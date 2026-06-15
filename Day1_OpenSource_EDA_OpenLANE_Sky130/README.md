@@ -1,4 +1,4 @@
-## Day1 Inception of Open-Source EDA, OpenLANE and SKY130 PDK
+## Day1-Inception of Open-Source EDA, OpenLANE and SKY130 PDK
 
 ### Author
 **Varun Venkata Allipuram**
