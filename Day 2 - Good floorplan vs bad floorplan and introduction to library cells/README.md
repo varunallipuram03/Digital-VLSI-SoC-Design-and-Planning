@@ -1,322 +1,376 @@
-Introduction
+# Day 2 - Good Floorplan vs Bad Floorplan and Introduction to Library Cells
 
-On the second day of the workshop, the focus shifted from the basic ASIC design flow to understanding the physical implementation aspects of chip design. The session introduced the concept of floorplanning, which acts as the foundation for all subsequent physical design stages. A well-planned floorplan plays a crucial role in achieving better timing performance, reduced routing congestion, efficient power distribution, and optimal silicon area utilization.
+## Overview
 
-The session also introduced standard library cells, which form the building blocks of digital integrated circuits. Along with floorplanning concepts, discussions included utilization factor, aspect ratio, power planning, noise margin, voltage droop, ground bounce, and the process of standard cell characterization.
+The focus of Day 2 was understanding the importance of floorplanning in the ASIC physical design flow and studying the characteristics of standard library cells. Floorplanning serves as the foundation for successful placement, routing, timing closure, and power distribution. A well-designed floorplan improves chip performance and reduces congestion, while a poor floorplan can introduce routing challenges, timing violations, and power integrity issues.
 
-Understanding the Netlist
+This session also introduced standard library cells, their design methodology, characterization process, and their role in modern digital integrated circuit design.
 
-Before entering the floorplanning stage, the synthesized design exists as a gate-level netlist. A netlist is a structural representation of the circuit containing all logic gates, flip-flops, buffers, input ports, output ports, and their interconnections.
+---
 
-Unlike RTL code, which describes the behavior of a circuit, a netlist explicitly specifies how the circuit is physically constructed using standard cells from a library.
+## Understanding the Netlist
 
-Screenshot: Design Connectivity Diagram
+After synthesis, the RTL description is converted into a gate-level netlist. A netlist represents the complete connectivity information of the design and describes how logic gates, flip-flops, buffers, inputs, and outputs are interconnected.
 
-(Insert Complete Design Connectivity Image)
+Unlike RTL code, which describes functionality, a netlist describes the actual implementation structure using standard cells available in the technology library.
 
-From the connectivity diagram, it can be observed that multiple sequential and combinational elements are interconnected to perform the intended functionality. The netlist generated after synthesis serves as the primary input for physical design tools.
+### Design Connectivity Representation
 
-Key Learning
-RTL is converted into a gate-level netlist after synthesis.
-Netlists contain structural information rather than behavioral descriptions.
-Physical design tools use netlists for placement and routing.
-Introduction to Floorplanning
+![Design Connectivity](images/netlist_connectivity.png)
 
-Floorplanning is the first stage of physical design where the overall structure of the chip is determined. During this stage, the designer defines the die area, core area, placement boundaries, routing resources, and power distribution strategy.
+The generated netlist becomes the primary input for physical design tools and forms the basis for floorplanning and placement.
 
-A good floorplan creates a strong foundation for placement and routing, while a poor floorplan can lead to congestion, timing violations, and power delivery issues.
+### Key Observations
 
-Screenshot: Floorplan Structure
+* RTL is transformed into a gate-level netlist after synthesis.
+* Netlists contain structural connectivity information.
+* Physical design tools use the netlist for placement and routing.
 
-(Insert Floorplan Image)
+---
 
-Importance of Floorplanning
-Defines chip dimensions.
-Allocates space for standard cells.
-Determines routing resources.
-Facilitates power distribution planning.
-Reduces congestion and timing violations.
-Core Area and Die Area
+## Introduction to Floorplanning
 
-The physical chip is known as the die. Inside the die lies the core area, where standard cells are placed.
+Floorplanning is the first stage of physical design where the physical dimensions and organization of the chip are defined. During this stage, the die area, core area, macro placement, routing resources, and power planning structures are established.
 
-Die Area > Core Area
+A good floorplan ensures efficient utilization of silicon area while providing sufficient routing resources and power distribution paths.
 
-The remaining space around the core is generally used for:
+### Floorplan Structure
 
-Input/Output pads
-Power rings
-Routing channels
+![Floorplan](images/floorplan_structure.png)
 
-The relationship between die area and core area directly affects placement efficiency and chip cost.
+### Importance of Floorplanning
 
-Utilization Factor
+* Defines chip dimensions and layout boundaries.
+* Determines available placement area.
+* Establishes routing resources.
+* Enables efficient power distribution.
+* Reduces congestion and timing violations.
 
-Utilization factor indicates how much of the core area is occupied by standard cells.
+---
 
-Utilization Factor = Area Occupied by Cells / Total Core Area
+## Core Area and Die Area
+
+The complete silicon chip is referred to as the **die**, while the region allocated for standard cell placement is known as the **core area**.
+
+The remaining area is generally used for:
+
+* Input and Output pads
+* Power rings
+* Routing channels
+* Clock distribution resources
+
+A proper balance between die area and core area is necessary to achieve optimal utilization and routing efficiency.
+
+---
+
+## Utilization Factor
+
+Utilization factor indicates how much of the available core area is occupied by standard cells.
+
+[
+Utilization\ Factor = \frac{Area\ Occupied\ by\ Standard\ Cells}{Total\ Core\ Area}
+]
 
 For example:
 
-If the core area is 100 square units and cells occupy 60 square units,
+* Core Area = 100 units²
+* Standard Cell Area = 60 units²
 
-Utilization Factor = 60/100 = 60%
+Utilization Factor = 60%
 
-Screenshot: Utilization Factor Example
+### Utilization Concept
 
-(Insert Utilization Factor Image)
+![Utilization Factor](images/utilization_factor.png)
 
-Good Utilization
+### Learning Points
 
-A moderate utilization factor provides sufficient routing resources while maintaining area efficiency.
+* Low utilization wastes silicon area.
+* High utilization causes routing congestion.
+* Balanced utilization improves routability and timing closure.
 
-Poor Utilization
+---
 
-Very high utilization may create routing congestion, while very low utilization wastes silicon area.
+## Aspect Ratio
 
-Key Learning
+Aspect ratio defines the relationship between the height and width of the core area.
 
-The utilization factor is one of the most important metrics during floorplanning because it directly affects routability and timing closure.
+[
+Aspect\ Ratio = \frac{Height}{Width}
+]
 
-Aspect Ratio
+A square floorplan has an aspect ratio equal to 1, while rectangular floorplans have values greater or less than 1.
 
-Aspect ratio defines the relationship between the height and width of the core.
+### Aspect Ratio Illustration
 
-Aspect Ratio = Height / Width
+![Aspect Ratio](images/aspect_ratio.png)
 
-A square floorplan has an aspect ratio of 1, while rectangular floorplans have values greater or less than 1.
+The aspect ratio influences routing complexity, wire length, congestion distribution, and placement quality.
 
-Screenshot: Aspect Ratio Illustration
+---
 
-(Insert Aspect Ratio Image)
+## Good Floorplan vs Bad Floorplan
 
-The aspect ratio influences routing complexity, wire length, and congestion distribution across the design.
+The quality of a floorplan directly impacts the success of subsequent physical design stages.
 
-Good Floorplan vs Bad Floorplan
+### Characteristics of a Good Floorplan
 
-The quality of the floorplan directly affects the success of all subsequent physical design stages.
+* Balanced utilization factor.
+* Uniform cell distribution.
+* Sufficient routing resources.
+* Proper macro placement.
+* Efficient power distribution network.
+* Reduced congestion hotspots.
 
-Characteristics of a Good Floorplan
-Balanced utilization factor.
-Uniform standard cell distribution.
-Adequate routing resources.
-Proper macro placement.
-Efficient power distribution.
-Reduced congestion.
-Screenshot: Good Floorplan
+### Characteristics of a Bad Floorplan
 
-(Insert Good Floorplan Image)
+* Uneven cell placement.
+* Excessive routing congestion.
+* Long interconnect lengths.
+* Poor macro positioning.
+* Increased timing and power challenges.
 
-Characteristics of a Bad Floorplan
-Uneven cell distribution.
-Excessive routing congestion.
-Long interconnect lengths.
-Poor macro placement.
-Power delivery challenges.
-Screenshot: Bad Floorplan
+### Floorplan Comparison
 
-(Insert Bad Floorplan Image)
+![Good vs Bad Floorplan](images/good_vs_bad_floorplan.png)
 
-Key Learning
+### Learning Outcome
 
-A good floorplan significantly improves timing closure, routing quality, and overall chip performance.
+A properly planned floorplan significantly improves timing closure, routing efficiency, and overall chip performance.
 
-Pre-Placed Cells
+---
 
-Certain large blocks cannot be freely moved during placement and are therefore pre-positioned during floorplanning.
+## Pre-Placed Cells
+
+Certain large blocks cannot be freely moved during placement and must be positioned during floorplanning.
 
 Examples include:
 
-Memory macros
-PLL blocks
-Analog IPs
-Clock generation circuits
-Screenshot: Pre-Placed Cell Example
+* SRAM Macros
+* PLL Blocks
+* Analog IPs
+* Clock Generation Circuits
 
-(Insert Macro Placement Image)
+### Macro Placement
 
-These blocks create placement constraints that must be considered during floorplanning.
+![Preplaced Cells](images/preplaced_cells.png)
 
-Decoupling Capacitors
+The placement of these macros affects routing resources and timing performance across the entire chip.
 
-Modern integrated circuits experience rapid switching activity, causing sudden current demands from the power supply.
+---
 
-To stabilize the power network, decoupling capacitors are placed near critical circuit blocks.
+## Decoupling Capacitors
 
-Functions of Decoupling Capacitors
-Reduce voltage fluctuations.
-Supply transient current.
-Minimize power supply noise.
-Improve reliability.
-Screenshot: Decoupling Capacitor Concept
+Rapid switching activity inside digital circuits causes sudden current demands from the power supply network.
 
-(Insert Decap Image)
+To stabilize the supply voltage, decoupling capacitors are inserted near critical circuit blocks.
 
-Power Planning
+### Benefits of Decoupling Capacitors
 
-After floorplanning, the Power Distribution Network (PDN) is constructed.
+* Reduce voltage fluctuations.
+* Provide transient current support.
+* Improve power integrity.
+* Reduce supply noise.
 
-The PDN distributes:
+### Decap Placement Concept
 
-VDD (Power Supply)
-VSS (Ground)
+![Decap Cells](images/decap_cells.png)
 
-to every cell in the design.
+---
 
-Screenshot: Power Planning Grid
+## Power Planning
 
-(Insert PDN Image)
+Power planning ensures reliable distribution of power throughout the chip.
 
-The power grid consists of horizontal and vertical power straps connected through vias and contacts.
+The Power Distribution Network (PDN) consists of:
 
-Benefits
-Reduces IR drop.
-Improves reliability.
-Ensures uniform current distribution.
-Noise Margin
+* VDD Rails
+* VSS Rails
+* Power Rings
+* Vertical Power Straps
+* Horizontal Power Straps
+* Vias and Contacts
 
-Noise margin indicates the amount of unwanted noise a digital signal can tolerate without causing incorrect logic interpretation.
+### Power Distribution Network
 
-The important voltage parameters are:
+![Power Planning](images/power_planning.png)
 
-VOH
-VOL
-VIH
-VIL
-Screenshot: Noise Margin Diagram
+A robust PDN minimizes IR drop and ensures reliable circuit operation.
 
-(Insert Noise Margin Image)
+### Benefits
 
-A larger noise margin results in greater circuit reliability.
+* Improved voltage stability.
+* Reduced IR drop.
+* Better reliability.
+* Uniform current distribution.
 
-Ground Bounce
+---
 
-Ground bounce occurs when multiple transistors switch simultaneously from logic high to logic low.
+## Noise Margin
 
-The sudden discharge current flowing through the ground network causes temporary fluctuations in the ground voltage.
+Noise margin represents the maximum amount of noise that a digital signal can tolerate without causing incorrect logic interpretation.
 
-Effects
-False switching
-Logic errors
-Reduced reliability
-Screenshot: Ground Bounce Illustration
+Important voltage parameters include:
 
-(Insert Ground Bounce Image)
+* VOH
+* VOL
+* VIH
+* VIL
 
-Voltage Droop
+### Noise Margin Representation
 
-Voltage droop occurs when many gates switch simultaneously from logic low to logic high.
+![Noise Margin](images/noise_margin.png)
 
-The large current demand causes a temporary reduction in the supply voltage.
+A larger noise margin improves circuit robustness and reliability.
 
-Effects
-Increased delay
-Timing violations
-Reduced performance
-Screenshot: Voltage Droop Illustration
+---
 
-(Insert Voltage Droop Image)
+## Ground Bounce and Voltage Droop
 
-Introduction to Library Cells
+### Ground Bounce
 
-Library cells are the fundamental building blocks used to construct digital circuits.
+Ground bounce occurs when multiple transistors switch simultaneously from HIGH to LOW, causing temporary fluctuations in the ground potential.
 
-A standard cell library typically contains:
+Effects include:
 
-Inverters
-Buffers
-NAND Gates
-NOR Gates
-XOR Gates
-Flip-Flops
-Multiplexers
+* False switching events.
+* Logic errors.
+* Reduced reliability.
 
-Each cell is carefully designed, verified, and characterized before being added to the library.
+### Voltage Droop
 
-Standard Cell Design Flow
+Voltage droop occurs when a large number of gates switch simultaneously from LOW to HIGH, creating a sudden demand for current.
 
-The creation of a standard cell involves several stages.
+Effects include:
 
-Screenshot: Standard Cell Design Flow
+* Increased delay.
+* Timing violations.
+* Reduced performance.
 
-(Insert Cell Design Flow Image)
+Understanding these effects is essential for designing reliable power delivery networks.
 
-Inputs
-Process Design Kit (PDK)
-Design Rules
-SPICE Models
-User Specifications
-Design Flow
-Circuit Design
-Layout Design
-DRC Verification
-LVS Verification
-Characterization
-Outputs
-GDSII Layout
-LEF File
-CDL Netlist
-Liberty File
-Standard Cell Layout
+---
 
-The layout is the physical representation of a standard cell.
+## Introduction to Library Cells
 
-Screenshot: Standard Cell Layout
+Library cells are the fundamental building blocks used to implement digital circuits.
 
-(Insert Metal Layer Layout Image)
+Typical library cells include:
+
+* Inverters
+* Buffers
+* NAND Gates
+* NOR Gates
+* XOR Gates
+* Multiplexers
+* Flip-Flops
+* Latches
+
+Each cell is carefully designed, verified, and characterized before being included in the standard cell library.
+
+---
+
+## Standard Cell Design Flow
+
+The development of a standard cell follows a structured design methodology.
+
+### Standard Cell Design Flow
+
+![Cell Design Flow](images/cell_design_flow.png)
+
+### Inputs
+
+* Process Design Kit (PDK)
+* Design Rules
+* SPICE Models
+* User Specifications
+
+### Design Stages
+
+1. Circuit Design
+2. Layout Design
+3. DRC Verification
+4. LVS Verification
+5. Characterization
+
+### Outputs
+
+* GDSII Layout
+* CDL Netlist
+* LEF File
+* Liberty (.lib) File
+
+---
+
+## Standard Cell Layout
+
+The physical implementation of a standard cell is represented through its layout.
+
+### Standard Cell Layout
+
+![Standard Cell Layout](images/standard_cell_layout.png)
 
 The layout contains:
 
-Diffusion Regions
-Poly Gates
-Contacts
-Vias
-Metal Layers
-Power Rails
-Screenshot: Pin Locations
+* Diffusion Layers
+* Poly Gates
+* Contacts
+* Vias
+* Metal Layers
+* Power Rails
 
-(Insert Pin Location Image)
+### Pin Locations
 
-Pin accessibility is an important consideration because it affects routing efficiency.
+![Pin Locations](images/pin_locations.png)
 
-Standard Cell Characterization
+Pin accessibility is an important factor because it directly affects routing quality.
 
-After layout verification, characterization is performed to determine the electrical properties of the cell.
+---
 
-Screenshot: Characterization Flow
+## Standard Cell Characterization
 
-(Insert GUNA Characterization Flow Image)
+After layout verification, characterization is performed to extract timing, power, and noise information.
+
+### Characterization Flow
+
+![Characterization Flow](images/characterization_flow.png)
 
 Characterization generates:
 
-Timing Models
-Power Models
-Noise Models
-Liberty Files
+* Timing Models
+* Power Models
+* Noise Models
+* Liberty Files
 
-These files are later used by synthesis and timing analysis tools.
+These models are later used during synthesis, placement, routing, and static timing analysis.
 
-Timing Characterization
+---
 
-Timing characterization determines parameters such as:
+## Timing Characterization
 
-Propagation Delay
-Rise Time
-Fall Time
-Input Slew
-Output Slew
-Screenshot: Timing Threshold Definitions
+Timing characterization determines important timing parameters used by EDA tools.
 
-(Insert Timing Threshold Image)
+### Timing Parameters
 
-Screenshot: Propagation Delay Measurement
+* Propagation Delay
+* Rise Time
+* Fall Time
+* Input Slew
+* Output Slew
 
-(Insert Delay Graph Image)
+### Timing Threshold Definitions
 
-Propagation delay is measured as the difference between the output threshold crossing time and the input threshold crossing time.
+![Timing Thresholds](images/timing_thresholds.png)
 
-These values are stored inside Liberty files and are used during static timing analysis.
+### Propagation Delay Measurement
 
-Conclusion
+![Propagation Delay](images/propagation_delay.png)
 
-Day 2 provided a comprehensive understanding of floorplanning and its impact on ASIC implementation. The session highlighted the characteristics of good and bad floorplans, utilization factor, aspect ratio, power planning, and signal integrity considerations such as voltage droop and ground bounce. Additionally, the introduction to library cells, standard cell layout, and characterization offered valuable insight into how digital building blocks are created and prepared for use in modern ASIC design flows. This knowledge forms the foundation for understanding placement, routing, timing optimization, and physical verification in subsequent stages of chip design.
+Propagation delay is calculated as the difference between the output threshold crossing time and the corresponding input threshold crossing time.
+
+The extracted timing information is stored in Liberty files and is used for static timing analysis.
+
+---
+
+## Conclusion
+
+Day 2 provided a detailed understanding of floorplanning fundamentals and the role of standard library cells in ASIC implementation. Concepts such as utilization factor, aspect ratio, macro placement, power planning, decoupling capacitors, noise margin, voltage droop, and ground bounce highlighted the importance of proper physical design planning. The session also introduced the standard cell design flow, layout methodology, and characterization process, providing insight into how library cells are developed and prepared for use in modern ASIC design flows.
