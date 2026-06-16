@@ -122,8 +122,6 @@ Aspect Ratio = Height / Width
 
 ### Aspect Ratio Illustration
 
-> Insert the Aspect Ratio image here
-
 The aspect ratio influences routing complexity, wire length, congestion distribution, and placement quality.
 
 ### Learning Points
@@ -237,8 +235,6 @@ The PDN is composed of several interconnected structures:
 
 ### Power Distribution Network Structure
 
-> Insert the Power Planning Grid image here
-
 <p align="center">
   <img src="images/power_planning.png" width="800">
 </p>
@@ -270,8 +266,6 @@ A larger noise margin indicates a more robust and reliable digital system.
 * **VIL** – Maximum Input Voltage recognized as Logic LOW
 
 ### Noise Margin Representation
-
-> Insert the Noise Margin image here
 
 <p align="center">
   <img src="images/noise_margin.png" width="800">
