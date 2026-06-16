@@ -158,7 +158,18 @@ The quality of a floorplan directly impacts the success of subsequent physical d
 
 ### Floorplan Comparison
 
-????????????
+GOOD FLOORPLAN                 BAD FLOORPLAN
+
+┌──────────────┐              ┌──────────────┐
+│ □ □ □ □ □ □  │              │ □□□□□□□□     │
+│ □ □ □ □ □ □  │              │ □□□□□□□□     │
+│ □ □ □ □ □ □  │              │              │
+│ □ □ □ □ □ □  │              │              │
+└──────────────┘              └──────────────┘
+
+Balanced Utilization          Congestion Hotspots
+Shorter Wires                 Long Interconnects
+Better Routing                Routing Blockages
 
 ### Learning Outcome
 
