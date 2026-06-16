@@ -710,9 +710,3 @@ The next stage focuses on **Floorplanning**, where the chip area, macro placemen
 
 
 
-
-
-
-
-
-Overall, this session established the groundwork for understanding placement, routing, timing optimization, and advanced physical design concepts in subsequent stages of the ASIC design flow.
