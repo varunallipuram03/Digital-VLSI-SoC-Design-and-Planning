@@ -137,48 +137,45 @@ The aspect ratio influences routing complexity, wire length, congestion distribu
 
 ## Good Floorplan vs Bad Floorplan
 
-The quality of a floorplan directly impacts the success of subsequent physical design stages.
+The quality of a floorplan directly determines the success of later physical design stages such as placement, clock tree synthesis, routing, timing closure, and power optimization. A well-planned floorplan improves routability and performance, whereas a poorly planned floorplan can create severe congestion, timing violations, and power integrity issues.
 
 ### Characteristics of a Good Floorplan
 
-* Balanced utilization factor.
-* Uniform cell distribution.
-* Sufficient routing resources.
-* Proper macro placement.
-* Efficient power distribution network.
-* Reduced congestion hotspots.
+A good floorplan is designed to achieve balanced utilization and efficient resource distribution across the chip.
+
+- Uniform standard cell distribution throughout the core area.
+- Adequate routing resources available for signal interconnections.
+- Proper placement of macros and pre-placed cells.
+- Balanced utilization factor to avoid congestion.
+- Efficient power distribution network (PDN).
+- Reduced wire lengths and improved timing performance.
+- Better routability and easier timing closure.
 
 ### Characteristics of a Bad Floorplan
 
-* Uneven cell placement.
-* Excessive routing congestion.
-* Long interconnect lengths.
-* Poor macro positioning.
-* Increased timing and power challenges.
+A bad floorplan often leads to implementation challenges during placement and routing.
+
+- Uneven distribution of standard cells.
+- Excessive routing congestion in specific regions.
+- Poor macro placement causing routing blockages.
+- Long interconnect lengths resulting in increased delay.
+- Increased IR drop and power integrity issues.
+- Difficulty in achieving timing closure.
+- Higher risk of design rule violations.
 
 ### Floorplan Comparison
 
-  GOOD FLOORPLAN                 BAD FLOORPLAN
-  
+<p align="center">
+  <img src="images/good_vs_bad_floorplan.png" width="850">
+</p>
 
- ┌──────────────┐              ┌──────────────┐
- │ □ □ □ □ □ □  │              │ □□□□□□□□     │
- │ □ □ □ □ □ □  │              │ □□□□□□□□     │
- │ □ □ □ □ □ □  │              │              │
- │ □ □ □ □ □ □  │              │              │
- └──────────────┘              └──────────────┘
+<p align="center">
+  <b>Figure:</b> Figure 2: Comparison between a Good Floorplan and a Bad Floorplan
+</p>
 
+### Key Learning Outcome
 
-
-Balanced Utilization          Congestion Hotspots
-Shorter Wires                 Long Interconnects
-Better Routing                Routing Blockages
-
-### Learning Outcome
-
-A properly planned floorplan significantly improves timing closure, routing efficiency, and overall chip performance.
-
----
+A properly planned floorplan serves as the foundation of successful ASIC implementation. By optimizing utilization, aspect ratio, macro placement, routing resources, and power planning early in the design flow, designers can significantly improve chip performance, reduce congestion, and achieve reliable timing closure.
 
 ## Pre-Placed Cells
 
