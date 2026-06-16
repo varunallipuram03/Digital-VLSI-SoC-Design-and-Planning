@@ -18,9 +18,9 @@ Unlike RTL code, which describes functionality, a netlist describes the actual i
 
 > Insert the Design Connectivity screenshot here
 
-```markdown
+
 ![Design Connectivity](images/design_connectivity.png)
-```
+
 
 The generated netlist becomes the primary input for physical design tools and forms the basis for floorplanning and placement.
 
