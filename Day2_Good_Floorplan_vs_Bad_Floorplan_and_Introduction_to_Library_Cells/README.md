@@ -161,7 +161,7 @@ A bad floorplan often leads to implementation challenges during placement and ro
 </p>
 
 <p align="center">
-  <b>Figure:</b> Figure 2: Comparison between a Good Floorplan and a Bad Floorplan
+  </b> Figure 2: Comparison between a Good Floorplan and a Bad Floorplan
 </p>
 
 ### Key Learning Outcome
