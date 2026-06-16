@@ -42,9 +42,6 @@ Floorplanning is the first stage of physical design where the physical dimension
 A good floorplan ensures efficient utilization of silicon area while providing sufficient routing resources and power distribution paths.
 
 ### Floorplan Structure
-
-> Insert the Floorplan Structure screenshot here
-
 ```markdown
 ![Floorplan Structure](images/floorplan_structure.png)
 ```
@@ -76,12 +73,6 @@ A proper balance between die area and core area is necessary to achieve optimal 
 
 > Insert the Core Area and Die Area image here
 
-```markdown
-![Core and Die Area](images/core_die_area.png)
-```
-
----
-
 ## Utilization Factor
 
 Utilization factor indicates how much of the available core area is occupied by standard cells.
@@ -102,10 +93,6 @@ Utilization Factor = Area Occupied by Standard Cells / Total Core Area
 ### Utilization Concept
 
 > Insert the Utilization Factor image here
-
-```markdown
-![Utilization Factor](images/utilization_factor.png)
-```
 
 ### Learning Points
 
@@ -136,10 +123,6 @@ Aspect Ratio = Height / Width
 ### Aspect Ratio Illustration
 
 > Insert the Aspect Ratio image here
-
-```markdown
-![Aspect Ratio](images/aspect_ratio.png)
-```
 
 The aspect ratio influences routing complexity, wire length, congestion distribution, and placement quality.
 
@@ -175,8 +158,7 @@ The quality of a floorplan directly impacts the success of subsequent physical d
 
 ### Floorplan Comparison
 
-> Insert the Good Floorplan vs Bad Floorplan image here
-
+????????????
 
 ### Learning Outcome
 
@@ -196,9 +178,6 @@ Examples include:
 * Clock Generation Circuits
 
 ### Macro Placement
-
-> Insert the Pre-Placed Cells image here
-
 ```markdown
 ![Preplaced Cells](images/preplaced_cells.png)
 ```
@@ -222,8 +201,6 @@ To stabilize the supply voltage, decoupling capacitors are inserted near critica
 * Improve reliability of operation.
 
 ### Decap Placement Concept
-
-> Insert the Decap Cell image here
 
 ```markdown
 ![Decap Cells](images/decap_cells.png)
@@ -365,8 +342,6 @@ Before a standard cell can be included in a technology library, it must pass thr
 
 ### Standard Cell Design Flow
 
-> Insert the Standard Cell Design Flow image here
-
 <p align="center">
   <img src="images/cell_design_flow.png" width="800">
 </p>
@@ -405,11 +380,6 @@ These outputs become essential inputs for synthesis, placement, routing, and tim
 
 A standard cell layout represents the physical realization of the transistor-level schematic. The layout must satisfy all manufacturing design rules while maintaining functionality and performance.
 
-### Standard Cell Layout
-
-> Insert the Standard Cell Layout image here
-
-
 ### Layout Components
 
 * Diffusion Layers
@@ -420,8 +390,6 @@ A standard cell layout represents the physical realization of the transistor-lev
 * Power Rails
 
 ### Pin Locations
-
-> Insert the Pin Location image here
 
 <p align="center">
   <img src="images/pins_locations.png" width="800">
