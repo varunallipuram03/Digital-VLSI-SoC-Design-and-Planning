@@ -69,10 +69,6 @@ The remaining area is generally used for:
 
 A proper balance between die area and core area is necessary to achieve optimal utilization and routing efficiency.
 
-### Core and Die Representation
-
-> Insert the Core Area and Die Area image here
-
 ## Utilization Factor
 
 Utilization factor indicates how much of the available core area is occupied by standard cells.
@@ -91,9 +87,6 @@ Utilization Factor = Area Occupied by Standard Cells / Total Core Area
 **Utilization Factor = 60 / 100 = 60%**
 
 ### Utilization Concept
-
-> Insert the Utilization Factor image here
-
 ### Learning Points
 
 * Low utilization wastes silicon area.
@@ -187,14 +180,9 @@ Examples include:
 * Clock Generation Circuits
 
 ### Macro Placement
-```markdown
-![Preplaced Cells](images/preplaced_cells.png)
-```
-
 The placement of these macros affects routing resources and timing performance across the entire chip.
 
 ---
-
 ## Decoupling Capacitors (Decap Cells)
 
 Rapid switching activity inside digital circuits causes sudden current demands from the power supply network.
@@ -208,12 +196,6 @@ To stabilize the supply voltage, decoupling capacitors are inserted near critica
 * Improve power integrity.
 * Reduce supply noise.
 * Improve reliability of operation.
-
-### Decap Placement Concept
-
-```markdown
-![Decap Cells](images/decap_cells.png)
-```
 
 ---
 ## Power Planning
