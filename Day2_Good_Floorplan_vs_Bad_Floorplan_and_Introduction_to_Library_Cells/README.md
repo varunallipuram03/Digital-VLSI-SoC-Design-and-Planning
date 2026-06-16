@@ -181,9 +181,6 @@ The quality of a floorplan directly impacts the success of subsequent physical d
 
 > Insert the Good Floorplan vs Bad Floorplan image here
 
-```markdown
-![Good vs Bad Floorplan](images/good_vs_bad_floorplan.png)
-```
 
 ### Learning Outcome
 
@@ -258,10 +255,13 @@ The PDN is composed of several interconnected structures:
 
 > Insert the Power Planning Grid image here
 
-```markdown
-![Power Planning](images/power_planning.png)
-```
+<p align="center">
+  <img src="images/power_planning.png" width="800">
+</p>
 
+<p align="center">
+  <b>Figure 2:</b> power_planning
+</p>
 ### Benefits of Proper Power Planning
 
 * Improves voltage stability across the chip.
@@ -289,10 +289,13 @@ A larger noise margin indicates a more robust and reliable digital system.
 
 > Insert the Noise Margin image here
 
-```markdown
-![Noise Margin](images/noise_margin.png)
-```
+<p align="center">
+  <img src="images/noise_margin.png" width="800">
+</p>
 
+<p align="center">
+  <b>Figure 3:</b> noise_margin
+</p>
 ### Why Noise Margin Matters
 
 A small noise margin makes the circuit vulnerable to incorrect logic interpretation, whereas a larger noise margin improves immunity against disturbances and ensures reliable operation under different conditions.
@@ -368,9 +371,13 @@ Before a standard cell can be included in a technology library, it must pass thr
 
 > Insert the Standard Cell Design Flow image here
 
-```markdown
-![Cell Design Flow](images/cell_design_flow.png)
-```
+<p align="center">
+  <img src="images/cell_design_flow.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 4:</b> cell_design_flow
+</p>
 
 ### Inputs Required
 
@@ -406,9 +413,6 @@ A standard cell layout represents the physical realization of the transistor-lev
 
 > Insert the Standard Cell Layout image here
 
-```markdown
-![Standard Cell Layout](images/standard_cell_layout.png)
-```
 
 ### Layout Components
 
@@ -423,9 +427,13 @@ A standard cell layout represents the physical realization of the transistor-lev
 
 > Insert the Pin Location image here
 
-```markdown
-![Pin Locations](images/pin_locations.png)
-```
+<p align="center">
+  <img src="images/pins_locations.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 5:</b> pins_locations
+</p>
 
 Pin accessibility is an important consideration because it directly affects placement flexibility, routing quality, and timing closure.
 
@@ -441,9 +449,13 @@ Characterization is the process of extracting electrical information that descri
 
 > Insert the Characterization Flow image here
 
-```markdown
-![Characterization Flow](images/characterization_flow.png)
-```
+<p align="center">
+  <img src="images/characterization_flow.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 6:</b> characterization_flow
+</p>
 
 ### Characterization Outputs
 
@@ -474,20 +486,26 @@ The extracted timing information is later used by Static Timing Analysis (STA) t
 
 > Insert the Timing Threshold image here
 
-```markdown
-![Timing Thresholds](images/timing_thresholds.png)
-```
+<p align="center">
+  <img src="images/timing_thresholds.png" width="800">
+</p>
 
+<p align="center">
+  <b>Figure 7:</b> timing_thresholds
+</p>
 Timing measurements are typically calculated using predefined voltage thresholds such as 20%, 50%, and 80% of the supply voltage.
 
 ### Propagation Delay Measurement
 
 > Insert the Propagation Delay image here
 
-```markdown
-![Propagation Delay](images/propagation_delay.png)
-```
+<p align="center">
+  <img src="images/propagation_delay.png" width="800">
+</p>
 
+<p align="center">
+  <b>Figure 8:</b> propagation_delay
+</p>
 Propagation delay is calculated as the difference between the output threshold crossing time and the corresponding input threshold crossing time.
 
 Accurate delay measurement is critical because it directly impacts timing closure and overall circuit performance.
@@ -499,4 +517,4 @@ Accurate delay measurement is critical because it directly impacts timing closur
 Day 2 provided a comprehensive understanding of floorplanning fundamentals and their impact on ASIC implementation. Concepts such as utilization factor, aspect ratio, macro placement, power planning, decoupling capacitors, noise margin, voltage droop, and ground bounce highlighted the importance of proper physical design planning.
 
 The session also introduced standard library cells, their design methodology, layout implementation, and characterization process. Understanding these concepts is essential because standard cells form the foundation of modern digital integrated circuits and directly influence the timing, power, and area characteristics of the final design.
-
+Overall, this session established the groundwork for understanding placement, routing, timing optimization, and advanced physical design concepts in subsequent stages of the ASIC design flow.
