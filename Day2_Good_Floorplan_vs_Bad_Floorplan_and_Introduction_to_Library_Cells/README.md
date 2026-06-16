@@ -403,11 +403,10 @@ A standard cell layout represents the physical realization of the transistor-lev
 ### Pin Locations
 
 <p align="center">
-  <img src="images/pins_locations.png" width="800">
+  <img src="images/cell_design_flow.png" width="800">
 </p>
-
 <p align="center">
-  <b>Figure 5:</b> pins_locations
+  <b>Figure 5:</b> cell_design_flow
 </p>
 
 Pin accessibility is an important consideration because it directly affects placement flexibility, routing quality, and timing closure.
@@ -421,9 +420,6 @@ Once the layout has successfully passed DRC and LVS verification, the standard c
 Characterization is the process of extracting electrical information that describes how the cell behaves under different operating conditions.
 
 ### Characterization Flow
-
-> Insert the Characterization Flow image here
-
 <p align="center">
   <img src="images/characterization_flow.png" width="800">
 </p>
@@ -459,8 +455,6 @@ The extracted timing information is later used by Static Timing Analysis (STA) t
 
 ### Timing Threshold Definitions
 
-> Insert the Timing Threshold image here
-
 <p align="center">
   <img src="images/timing_thresholds.png" width="800">
 </p>
@@ -471,8 +465,6 @@ The extracted timing information is later used by Static Timing Analysis (STA) t
 Timing measurements are typically calculated using predefined voltage thresholds such as 20%, 50%, and 80% of the supply voltage.
 
 ### Propagation Delay Measurement
-
-> Insert the Propagation Delay image here
 
 <p align="center">
   <img src="images/propagation_delay.png" width="800">
