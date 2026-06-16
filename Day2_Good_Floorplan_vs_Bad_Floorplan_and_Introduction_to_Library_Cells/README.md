@@ -17,9 +17,6 @@ Unlike RTL code, which describes functionality, a netlist describes the actual i
 
 ### Design Connectivity Representation
 
-> Insert the Design Connectivity screenshot here
-
-
 <p align="center">
   <img src="images/design_connectivity.png" width="800">
 </p>
@@ -27,7 +24,6 @@ Unlike RTL code, which describes functionality, a netlist describes the actual i
 <p align="center">
   <b>Figure 1:</b> design_connectivity
 </p>
-
 
 The generated netlist becomes the primary input for physical design tools and forms the basis for floorplanning and placement.
 
