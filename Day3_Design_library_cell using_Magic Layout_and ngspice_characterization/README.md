@@ -1,171 +1,169 @@
-Day 3 – Design Library Cell using Magic Layout and ngspice Characterization
-Overview
+# Day 3 – Design Library Cell using Magic Layout and ngspice Characterization
+
+## Overview
 
 Day 3 focused on understanding CMOS inverter characteristics and designing a standard cell layout using the Magic VLSI layout editor. The session covered inverter robustness, switching threshold analysis, body effect, propagation delays, transistor sizing impact, and physical layout implementation in SKY130 technology. The behavior of the CMOS inverter was studied using SPICE simulations and theoretical equations, followed by layout realization in Magic.
 
-CMOS Inverter Robustness
+---
+
+# CMOS Inverter Robustness
 
 A CMOS inverter is the fundamental building block of digital circuits. Its performance depends on several factors including transistor sizing, threshold voltage, propagation delay, noise margin, and switching threshold.
 
 The robustness of an inverter is evaluated using its Voltage Transfer Characteristic (VTC), which shows how the output voltage changes with respect to the input voltage.
 
-Switching Threshold Voltage (Vm)
+---
 
-The switching threshold voltage (Vm) is defined as the point where:
+# Switching Threshold Voltage (Vm)
 
-V
-in
-	​
+The switching threshold voltage (**Vm**) is defined as the point where:
 
-=V
-out
-	​
-
+$$
+V_{in}=V_{out}=V_m
+$$
 
 At this point, both NMOS and PMOS transistors conduct simultaneously.
 
 The drain currents satisfy:
 
-I
-DSP
-	​
-
-=−I
-DSN
-	​
-
+$$
+I_{DSP} = -I_{DSN}
+$$
 
 Vm plays an important role in determining:
 
-Noise Margins
-Switching Speed
-Static Power Consumption
-Inverter Robustness
-Switching Threshold Comparison
+* Noise Margins
+* Switching Speed
+* Static Power Consumption
+* Inverter Robustness
 
-Observation
+---
+
+## Switching Threshold Comparison
+
+![Switching Threshold Comparison](images/switching_threshold_comparison.png)
+
+### Observation
 
 Two CMOS inverter configurations were analyzed:
 
-NMOS Width	PMOS Width	Switching Threshold
-0.375 μm	0.375 μm	~0.98 V
-0.375 μm	0.9375 μm	~1.2 V
-Analysis
+| NMOS Width | PMOS Width | Switching Threshold |
+| ---------- | ---------- | ------------------- |
+| 0.375 μm   | 0.375 μm   | ~0.98 V             |
+| 0.375 μm   | 0.9375 μm  | ~1.2 V              |
+
+### Analysis
 
 When the PMOS width is increased, the pull-up strength becomes stronger. As a result, the switching threshold shifts toward a higher voltage value.
 
 This demonstrates that transistor sizing directly influences inverter characteristics and can be adjusted to optimize circuit performance.
 
-Static Behavior Evaluation of CMOS Inverter
+---
+
+# Static Behavior Evaluation of CMOS Inverter
 
 The static behavior of the inverter can be understood through the Voltage Transfer Characteristic (VTC).
 
-Different Operating Regions
+![Static Behavior Evaluation](images/switching_threshold_regions.png)
 
-As the input voltage increases, the inverter transitions through several operating regions:
+## Different Operating Regions
 
-Region 1
-PMOS : Linear Region
-NMOS : OFF
+### Region 1
+
+* PMOS : Linear Region
+* NMOS : OFF
 
 Output remains at logic HIGH.
 
-Region 2
-PMOS : Linear Region
-NMOS : Saturation Region
+### Region 2
+
+* PMOS : Linear Region
+* NMOS : Saturation Region
 
 Output starts decreasing.
 
-Region 3
-PMOS : Saturation Region
-NMOS : Saturation Region
+### Region 3
 
-This region contains the switching threshold (Vm).
+* PMOS : Saturation Region
+* NMOS : Saturation Region
 
-Region 4
-PMOS : Saturation Region
-NMOS : Linear Region
+This region contains the switching threshold (**Vm**).
+
+### Region 4
+
+* PMOS : Saturation Region
+* NMOS : Linear Region
 
 Output falls rapidly.
 
-Region 5
-PMOS : OFF
-NMOS : Linear Region
+### Region 5
+
+* PMOS : OFF
+* NMOS : Linear Region
 
 Output reaches logic LOW.
 
-Mathematical Analysis of Switching Threshold
+---
+
+# Mathematical Analysis of Switching Threshold
 
 The switching threshold can be derived using the current balance equations of NMOS and PMOS devices.
 
+![Vm Equations](images/vm_equations.png)
+
 The switching threshold is represented as:
 
-V
-m
-	​
-
-=
-1+R
-R⋅V
-DD
-	​
-
-	​
-
+$$
+V_m = \frac{R \cdot V_{DD}}{1+R}
+$$
 
 Where:
 
-R=
-K
-n
-	​
+$$
+R=\frac{K_pV_{dsatp}}{K_nV_{dsatn}}
+$$
 
-V
-dsatn
-	​
+The ratio **R** depends on:
 
-K
-p
-	​
+* NMOS width-to-length ratio
+* PMOS width-to-length ratio
+* Mobility ratio
+* Saturation voltages
+* Process parameters
 
-V
-dsatp
-	​
+### Observation
 
-	​
+Increasing the PMOS width increases **R**, thereby increasing the switching threshold voltage.
 
+---
 
-The ratio R depends on:
-
-NMOS width-to-length ratio
-PMOS width-to-length ratio
-Mobility ratio
-Saturation voltages
-Process parameters
-Observation
-
-Increasing the PMOS width increases R, thereby increasing the switching threshold voltage.
-
-Propagation Delay Analysis
+# Propagation Delay Analysis
 
 Propagation delay determines how quickly the inverter can respond to changes in the input signal.
 
-Results
-Parameter	Value
-Rise Delay	148 ps
-Fall Delay	71 ps
-Switching Threshold	0.99 V
-Analysis
+![Delay Analysis](images/delay_analysis.png)
+
+## Results
+
+| Parameter           | Value  |
+| ------------------- | ------ |
+| Rise Delay          | 148 ps |
+| Fall Delay          | 71 ps  |
+| Switching Threshold | 0.99 V |
+
+### Analysis
 
 The rise delay is greater than the fall delay because:
 
-Electron mobility in NMOS devices is higher.
-Hole mobility in PMOS devices is lower.
-NMOS pulls down the output faster than PMOS pulls it up.
+* Electron mobility in NMOS devices is higher.
+* Hole mobility in PMOS devices is lower.
+* NMOS pulls down the output faster than PMOS pulls it up.
 
 Therefore, PMOS devices are usually made wider than NMOS devices to compensate for mobility differences and achieve balanced delays.
 
-Body Effect and Threshold Voltage Variation
+---
+
+# Body Effect and Threshold Voltage Variation
 
 Body effect is an important second-order effect in MOSFETs.
 
@@ -173,81 +171,103 @@ It occurs when a voltage difference exists between the source and body terminals
 
 As the source-to-body voltage increases, the threshold voltage also increases.
 
-Threshold Voltage Equation
-V
-t
-	​
+![Body Effect](images/body_effect.png)
 
-=V
-t0
-	​
+## Threshold Voltage Equation
 
-+γ(
-∣−2ϕ
-f
-	​
+$$
+V_t = V_{t0} + \gamma
+\left(
+\sqrt{| -2\phi_f + V_{SB}|}
+---------------------------
 
-+V
-SB
-	​
+\sqrt{| -2\phi_f|}
+\right)
+$$
 
-∣
-	​
+| Parameter | Description                     |
+| --------- | ------------------------------- |
+| $V_{t0}$  | Threshold voltage at $V_{SB}=0$ |
+| $\gamma$  | Body effect coefficient         |
+| $\phi_f$  | Fermi potential                 |
+| $V_{SB}$  | Source-to-body voltage          |
 
-−
-∣−2ϕ
-f
-	​
-
-∣
-	​
-
-)
-
-Where:
-
-Parameter	Description
-Vt₀	Threshold voltage at VSB = 0
-γ	Body effect coefficient
-ϕf	Fermi potential
-VSB	Source-to-body voltage
-Observation
+### Observation
 
 An increase in body bias results in:
 
-Increased threshold voltage
-Reduced drive current
-Increased propagation delay
-Reduced switching speed
+* Increased threshold voltage
+* Reduced drive current
+* Increased propagation delay
+* Reduced switching speed
 
 This effect must be considered during transistor characterization and standard cell design.
 
-CMOS Inverter Layout Design using Magic
+---
+
+# CMOS Inverter Layout Design using Magic
 
 After understanding inverter behavior theoretically, a CMOS inverter layout was implemented using the Magic VLSI layout editor with SKY130 technology.
 
-Layout Components
-PMOS Transistor
-Located in the N-Well region.
-Connected to VDD rail.
-NMOS Transistor
-Located in the P-Substrate.
-Connected to GND rail.
-Input Terminal (A)
-Connected through a common polysilicon gate.
-Controls both PMOS and NMOS simultaneously.
-Output Terminal (Y)
-Formed by connecting the drains of PMOS and NMOS.
-Produces the inverted output.
-Power Rails
-VPWR connected to VDD.
-VGND connected to Ground.
-Advantages of CMOS Inverter Layout
-Very low static power consumption.
-High noise immunity.
-Full rail-to-rail output swing.
-High switching speed.
-Suitable as a standard cell for digital design.
+![CMOS Inverter Layout](images/inverter_layout_magic.png)
+
+## Layout Components
+
+### PMOS Transistor
+
+* Located in the N-Well region.
+* Connected to VDD rail.
+
+### NMOS Transistor
+
+* Located in the P-Substrate.
+* Connected to GND rail.
+
+### Input Terminal (A)
+
+* Connected through a common polysilicon gate.
+* Controls both PMOS and NMOS simultaneously.
+
+### Output Terminal (Y)
+
+* Formed by connecting the drains of PMOS and NMOS.
+* Produces the inverted output.
+
+### Power Rails
+
+* VPWR connected to VDD.
+* VGND connected to Ground.
+
+---
+
+## Advantages of CMOS Inverter Layout
+
+* Very low static power consumption.
+* High noise immunity.
+* Full rail-to-rail output swing.
+* High switching speed.
+* Suitable as a standard cell for digital design.
+
+---
+
+# Key Learnings
+
+During Day 3, the following concepts were learned:
+
+* CMOS inverter robustness evaluation.
+* Voltage Transfer Characteristics (VTC).
+* Switching Threshold Voltage (Vm).
+* Effect of transistor sizing on inverter performance.
+* PMOS and NMOS operating regions.
+* Propagation delay analysis.
+* Body effect and threshold voltage variation.
+* Standard cell layout design using Magic.
+* SKY130 technology-based inverter implementation.
+* Relationship between theoretical analysis and physical layout design.
+
+---
+
+
 
 # Detailed CMOS Fabrication Process Using 16-Mask Methodology
 
