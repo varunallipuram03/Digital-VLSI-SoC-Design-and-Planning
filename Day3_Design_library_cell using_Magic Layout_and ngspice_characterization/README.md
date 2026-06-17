@@ -40,8 +40,13 @@ Vm plays an important role in determining:
 ---
 
 ## Switching Threshold Comparison
+<p align="center">
+  <img src="images/switching_threshold_comparison.png" width="800">
+</p>
 
-![Switching Threshold Comparison](images/switching_threshold_comparison.png)
+<p align="center">
+  <b>Figure 1:</b> switching_threshold_comparison
+</p>
 
 ### Observation
 
@@ -63,8 +68,13 @@ This demonstrates that transistor sizing directly influences inverter characteri
 # Static Behavior Evaluation of CMOS Inverter
 
 The static behavior of the inverter can be understood through the Voltage Transfer Characteristic (VTC).
+<p align="center">
+  <img src="images/switching_threshold_regions.png" width="800">
+</p>
 
-![Static Behavior Evaluation](images/switching_threshold_regions.png)
+<p align="center">
+  <b>Figure 2:</b> switching_threshold_regions
+</p>
 
 ## Different Operating Regions
 
@@ -109,7 +119,13 @@ Output reaches logic LOW.
 
 The switching threshold can be derived using the current balance equations of NMOS and PMOS devices.
 
-![Vm Equations](images/vm_equations.png)
+<p align="center">
+  <img src="images/vm_equations.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 3:</b> vm_equations
+</p>
 
 The switching threshold is represented as:
 
@@ -141,7 +157,14 @@ Increasing the PMOS width increases **R**, thereby increasing the switching thre
 
 Propagation delay determines how quickly the inverter can respond to changes in the input signal.
 
-![Delay Analysis](images/delay_analysis.png)
+
+<p align="center">
+  <img src="images/delay_analysis.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 4:</b> delay_analysis
+</p>
 
 ## Results
 
@@ -171,7 +194,13 @@ It occurs when a voltage difference exists between the source and body terminals
 
 As the source-to-body voltage increases, the threshold voltage also increases.
 
-![Body Effect](images/body_effect.png)
+<p align="center">
+  <img src="images/body_effect.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 5:</b> body_effect
+</p>
 
 ## Threshold Voltage Equation
 
@@ -209,7 +238,14 @@ This effect must be considered during transistor characterization and standard c
 
 After understanding inverter behavior theoretically, a CMOS inverter layout was implemented using the Magic VLSI layout editor with SKY130 technology.
 
-![CMOS Inverter Layout](images/inverter_layout_magic.png)
+
+<p align="center">
+  <img src="images/inverter_layout_magic.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 6:</b> inverter_layout_magic
+</p>
 
 ## Layout Components
 
@@ -526,6 +562,14 @@ After completion of all fabrication steps:
 * Drains are connected together to form the output terminal (Y).
 * PMOS source is connected to VPWR.
 * NMOS source is connected to VGND.
+
+<p align="center">
+  <img src="images/16_Mask_CMOS_Fabricate.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 7:</b> 16_Mask_CMOS_Fabricate
+</p>
 
 This structure forms a CMOS inverter capable of providing rail-to-rail output swing, low static power consumption, high noise immunity, and robust switching performance.
 
