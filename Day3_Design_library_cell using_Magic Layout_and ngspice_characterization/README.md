@@ -551,26 +551,5 @@ Understanding this relationship is crucial because every polygon drawn in Magic 
 
 # What I Learned
 
-Throughout Day 3, I gained a deeper understanding of how CMOS devices are fabricated, characterized, and implemented as physical layouts. The session helped me connect semiconductor manufacturing concepts with transistor-level circuit behavior and layout design.
-
-### Key Concepts Learned
-
-* Understood the complete **16-Mask CMOS Fabrication Process** and the purpose of each fabrication step involved in creating PMOS and NMOS transistors.
-* Learned how N-Well formation, gate oxide growth, polysilicon deposition, source/drain implantation, contact formation, and metal routing contribute to CMOS device fabrication.
-* Studied the structure and operation of a **CMOS Inverter**, the fundamental building block of digital circuits.
-* Understood the significance of **Voltage Transfer Characteristics (VTC)** in evaluating inverter performance.
-* Learned the concept of **Switching Threshold Voltage (Vm)** and how transistor sizing affects its value.
-* Analyzed different operating regions of PMOS and NMOS transistors during inverter switching.
-* Understood the mathematical derivation of switching threshold voltage and the relationship between PMOS and NMOS drive strengths.
-* Studied **Propagation Delay Analysis** and learned how carrier mobility influences rise and fall times.
-* Gained knowledge about the **Body Effect** and its impact on threshold voltage and transistor performance.
-* Learned how transistor dimensions influence inverter robustness, noise margins, power consumption, and switching speed.
-* Explored the implementation of a CMOS inverter using the **Magic VLSI Layout Editor** in SKY130 technology.
-* Understood the relationship between fabrication masks, physical layout layers, and the final silicon implementation.
-* Learned how layout design translates fabrication concepts into manufacturable VLSI structures.
-* Developed an understanding of the connection between device fabrication, circuit characterization, and physical design in the ASIC design flow.
-
-### Outcome
-
 By the end of Day 3, I was able to understand the complete journey of a CMOS inverter—from silicon fabrication using the 16-mask process, to transistor characterization using theoretical and simulation-based analysis, and finally to its physical realization as a standard cell layout in Magic. This knowledge provides a strong foundation for the upcoming stages of ASIC physical design and standard cell characterization.
 
