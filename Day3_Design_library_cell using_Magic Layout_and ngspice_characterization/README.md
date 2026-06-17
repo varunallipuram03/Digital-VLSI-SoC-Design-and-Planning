@@ -41,7 +41,7 @@ Vm plays an important role in determining:
 
 ## Switching Threshold Comparison
 <p align="center">
-  <img src="images/switching_threshold_comparison.png" width="800">
+  <img src="/switching_threshold_comparison.png" width="800">
 </p>
 
 <p align="center">
