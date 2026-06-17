@@ -1,7 +1,7 @@
 # Day 3 – Design Library Cell using Magic Layout and ngspice Characterization
 
 ## Overview
-focused on understanding CMOS inverter characteristics and designing a standard cell layout using the Magic VLSI layout editor. The session covered inverter robustness, switching threshold analysis, body effect, propagation delays, transistor sizing impact, and physical layout implementation in SKY130 technology. The behavior of the CMOS inverter was studied using SPICE simulations and theoretical equations, followed by layout realization in Magic.
+Focused on understanding CMOS inverter characteristics and designing a standard cell layout using the Magic VLSI layout editor. The session covered inverter robustness, switching threshold analysis, body effect, propagation delays, transistor sizing impact, and physical layout implementation in SKY130 technology. The behavior of the CMOS inverter was studied using SPICE simulations and theoretical equations, followed by layout realization in Magic.
 
 ---
 
