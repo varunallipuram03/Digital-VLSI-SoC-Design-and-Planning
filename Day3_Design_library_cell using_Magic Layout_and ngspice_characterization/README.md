@@ -563,7 +563,7 @@ After completion of all fabrication steps:
 * NMOS source is connected to VGND.
 
 <p align="center">
-  <img src="images/16_Mask_CMOS_Fabricate.png" width="800">
+  <img src="images/16_Mask_CMOS_Fabricate.jpeg" width="800">
 </p>
 
 <p align="center">
