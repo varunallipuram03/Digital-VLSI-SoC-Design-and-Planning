@@ -1,304 +1,396 @@
-Day 5 - Routing, Design Rule Checking and Parasitic Extraction
-Overview
+# Day 5: Routing, Design Rule Checking and Parasitic Extraction
 
-After placement and clock tree synthesis, the design enters one of the most critical stages of the physical design flow: Routing. The purpose of routing is to establish reliable electrical connections between all the placed standard cells, macros, input/output pins, and clock network components while obeying manufacturing constraints.
+## Table of Contents
 
-Routing directly impacts signal integrity, timing closure, power consumption, and overall chip manufacturability. Even a perfectly placed design can fail if routing introduces excessive delay, congestion, or design rule violations.
+* [Overview](#overview)
+* [Understanding Routing in Physical Design](#understanding-routing-in-physical-design)
+* [Maze Routing using Lee's Algorithm](#maze-routing-using-lees-algorithm)
+* [Routing Stages](#routing-stages)
 
-During this session, I explored the complete routing flow, including maze routing algorithms, detailed routing using TritonRoute, design rule verification, and parasitic extraction techniques used in modern VLSI design.
+  * [Global Routing](#global-routing)
+  * [Detailed Routing](#detailed-routing)
+* [Detailed Routing using TritonRoute](#detailed-routing-using-tritonroute)
+* [Preprocessed Route Guides](#preprocessed-route-guides)
+* [Inter-Guide Connectivity](#inter-guide-connectivity)
+* [Access Points and Connectivity Handling](#access-points-and-connectivity-handling)
+* [Routing Topology Optimization](#routing-topology-optimization)
+* [Design Rule Checking (DRC)](#design-rule-checking-drc)
+* [Parasitic Extraction](#parasitic-extraction)
+* [Key Learnings](#key-learnings)
+* [Conclusion](#conclusion)
 
-Understanding Routing in Physical Design
+---
 
-Routing is the process of creating physical metal interconnections between circuit elements.
+# Overview
 
-The router must determine:
+After placement and Clock Tree Synthesis (CTS), the design enters one of the most critical stages of the physical design flow: **Routing**. The objective of routing is to establish reliable electrical connections between standard cells, macros, I/O pins, and clock network elements while satisfying all manufacturing and design constraints.
 
-Which metal layers to use
-The path connecting source and destination
-Where vias should be inserted
-How to avoid congestion
-How to satisfy all design rules
+Routing plays a crucial role in determining timing performance, signal integrity, power consumption, and manufacturability. Even if floorplanning and placement are optimal, poor routing can introduce congestion, excessive delay, crosstalk, and design rule violations that prevent successful chip fabrication.
 
-The objective is not simply to connect two points, but to find an optimized path that satisfies electrical and manufacturing requirements.
+In this section, I explored routing methodologies, detailed routing using TritonRoute, design rule verification, and parasitic extraction techniques used in modern ASIC implementation flows.
 
-Maze Routing using Lee's Algorithm
+---
 
-One of the earliest and most influential routing techniques is Lee's Maze Routing Algorithm.
+# Understanding Routing in Physical Design
 
-The algorithm treats the routing region as a grid and systematically searches for a path between the source and target nodes.
+Routing is the process of creating physical metal interconnections that implement the logical connectivity described by the synthesized netlist.
 
-Routing Procedure
-Step 1: Generate Routing Grid
+A routing engine must determine:
 
-The routing area is divided into discrete grid locations.
+* Which metal layers to use
+* The optimal path between source and destination
+* Via insertion locations
+* Congestion avoidance strategies
+* Compliance with manufacturing rules
 
-Step 2: Define Source and Target
+The goal is not simply connectivity, but achieving connectivity while minimizing wirelength, delay, congestion, and fabrication risk.
 
-The source and destination points are identified within the routing space.
+---
 
-Step 3: Wave Propagation
+# Maze Routing using Lee's Algorithm
 
-The algorithm expands outward from the source node and labels neighboring grid cells with increasing cost values.
+Lee's Algorithm is one of the earliest and most widely recognized routing algorithms used in VLSI physical design.
 
-Step 4: Backtracking
+The routing area is represented as a grid. Starting from the source node, the algorithm performs a wave expansion until the target node is reached. The shortest path is then obtained through backtracking.
 
-Once the target is reached, the shortest path is reconstructed by tracing backward through decreasing labels.
+## Routing Procedure
 
-Step 5: Path Optimization
+### Step 1: Generate Routing Grid
 
-Among multiple valid routes, paths with fewer bends are generally preferred because they reduce resistance and routing complexity.
+The routing region is divided into discrete grid cells.
 
-Maze Routing Illustration
+### Step 2: Define Source and Target
 
-The routing wave expands until the destination is reached. The shortest valid route is then selected while avoiding obstacles present in the layout.
+Source and destination nodes are identified.
 
-Routing Stages
+### Step 3: Wave Propagation
 
-Modern physical design tools divide routing into two major phases.
+Neighboring grid cells are labeled with increasing cost values as the wave expands outward.
 
-Global Routing
+### Step 4: Backtracking
 
-Global routing determines an approximate path for each net.
+After reaching the destination, the shortest path is reconstructed.
 
-Its responsibilities include:
+### Step 5: Path Optimization
 
-Congestion estimation
-Resource allocation
-Layer assignment
-Generation of routing guides
+Among multiple valid paths, routes with fewer bends are preferred to reduce resistance and routing complexity.
 
-The output of global routing is not the final wire geometry but a set of routing guides that detailed routing must follow.
+<div align="center">
+<img src="images/maze_routing_lee_algorithm.png" width="800">
+</div>
 
-Detailed Routing
+<p align="center">
+<b>Figure 1:</b> Maze Routing using Lee's Algorithm
+</p>
 
-Detailed routing converts routing guides into exact wire shapes and vias.
+### Observation
 
-Responsibilities include:
+The algorithm guarantees the shortest valid route while avoiding obstacles. Although computationally expensive for large designs, it forms the conceptual foundation for many modern routing strategies.
 
-Exact track assignment
-Via insertion
-Pin accessibility verification
-Design rule compliance
-Connectivity completion
+---
 
-This stage directly generates the final manufacturable interconnect structure.
+# Routing Stages
 
-Detailed Routing using TritonRoute
+Modern routing is divided into two major phases.
+
+## Global Routing
+
+Global routing determines an approximate path for each net and allocates routing resources.
+
+### Responsibilities
+
+* Congestion estimation
+* Resource allocation
+* Metal layer assignment
+* Routing guide generation
+
+The output of global routing consists of routing guides rather than exact wire geometries.
+
+---
+
+## Detailed Routing
+
+Detailed routing transforms routing guides into actual metal segments and vias.
+
+### Responsibilities
+
+* Exact track assignment
+* Via insertion
+* Pin accessibility verification
+* Design rule compliance
+* Connectivity completion
+
+<div align="center">
+<img src="images/routing_after_cts.png" width="900">
+</div>
+
+<p align="center">
+<b>Figure 2:</b> Routed Design after CTS
+</p>
+
+### Observation
+
+The routed layout contains signal nets, clock networks, buffers, and flip-flops interconnected across multiple metal layers. Routing quality directly impacts timing closure and signal integrity.
+
+---
+
+# Detailed Routing using TritonRoute
 
 TritonRoute is the detailed routing engine used in the OpenROAD flow.
 
-Unlike traditional routers that only focus on connectivity, TritonRoute simultaneously considers:
+Unlike traditional routing approaches that focus solely on connectivity, TritonRoute simultaneously considers:
 
-Routing correctness
-Design rule compliance
-Pin accessibility
-Manufacturability
-TritonRoute Workflow
-Initial Detailed Routing
+* Routing correctness
+* Design rule compliance
+* Manufacturability
+* Pin accessibility
+* Connectivity completion
 
-The router first generates an initial routing solution based on global routing information.
+## TritonRoute Workflow
 
-Route Guide Utilization
+### Initial Detailed Routing
 
-TritonRoute follows the routing guides generated during global routing and attempts to remain within these guides whenever possible.
+Generates an initial routing solution using global routing information.
 
-Connectivity Verification
+### Route Guide Utilization
 
-Each net must maintain complete connectivity between all associated pins and routing segments.
+Uses preprocessed routing guides generated during global routing.
 
-Search and Repair
+### Connectivity Verification
 
-Any violations discovered during routing are corrected iteratively through a search-and-repair mechanism.
+Ensures complete connectivity between all routing segments and pins.
 
-TritonRoute Architecture
+### Search and Repair
 
-Key observations:
+Iteratively resolves routing violations until a clean solution is achieved.
 
-Performs initial detailed routing.
-Uses preprocessed routing guides.
-Ensures inter-guide connectivity.
-Supports parallel and sequential routing strategies across metal layers.
-Preprocessed Route Guides
+<div align="center">
+<img src="images/tritonroute_overview.png" width="800">
+</div>
 
-Routing guides generated during global routing undergo preprocessing before being used by TritonRoute.
+<p align="center">
+<b>Figure 3:</b> TritonRoute Detailed Routing Architecture
+</p>
 
-The preprocessing operations include:
+### Key Features
 
-Splitting
-Merging
-Bridging
+* Initial detailed routing
+* Inter-guide connectivity support
+* Parallel routing capability
+* Sequential layer routing strategy
+* DRC-aware routing methodology
 
-The purpose is to create routing regions that are easier for the detailed router to handle.
+---
 
-Requirements of Preprocessed Guides
+# Preprocessed Route Guides
 
-For efficient routing, guides should:
+Before detailed routing begins, routing guides generated during global routing undergo preprocessing.
 
-Maintain unit width
-Follow preferred routing directions
-Preserve connectivity between routing regions
-Minimize routing ambiguity
-Preprocessed Route Guide Example
+## Preprocessing Operations
 
-The preprocessing stage converts raw routing information into structured routing regions that improve detailed routing quality.
+1. Splitting
+2. Merging
+3. Bridging
 
-Inter-Guide Connectivity
+These operations simplify routing regions and improve detailed routing efficiency.
 
-A routing guide alone is not sufficient.
+<div align="center">
+<img src="images/preprocessed_route_guides.png" width="800">
+</div>
 
-Adjacent routing guides belonging to the same net must remain electrically connected.
+<p align="center">
+<b>Figure 4:</b> Preprocessed Route Guides
+</p>
 
-Inter-guide connectivity ensures that:
+## Requirements of Preprocessed Guides
 
-Neighboring guides communicate properly
-Nets remain continuous across layers
-Routing integrity is preserved throughout the layout
+* Unit width representation
+* Preferred routing direction
+* Connectivity preservation
+* Reduced routing ambiguity
 
-Without proper connectivity, the router may generate disconnected wire segments.
+### Observation
 
-Access Points and Connectivity Handling
+Preprocessed guides provide structured routing regions that allow the detailed router to operate more efficiently while preserving net connectivity.
 
-TritonRoute introduces the concept of Access Points (APs).
+---
 
-Access Point (AP)
+# Inter-Guide Connectivity
+
+Routing guides belonging to the same net must remain electrically connected throughout the routing process.
+
+Inter-guide connectivity ensures:
+
+* Continuous signal propagation
+* Proper layer transitions
+* Reliable net connectivity
+* Correct routing completion
+
+Without inter-guide connectivity, disconnected routing segments may be generated.
+
+---
+
+# Access Points and Connectivity Handling
+
+To facilitate routing, TritonRoute introduces the concept of Access Points.
+
+## Access Point (AP)
 
 An Access Point is an on-grid location used to connect:
 
-Pins
-Lower metal layers
-Upper metal layers
-I/O ports
+* Pins
+* Lower metal layers
+* Upper metal layers
+* I/O ports
 
-It acts as an entry or exit location during routing.
+## Access Point Cluster (APC)
 
-Access Point Cluster (APC)
+An Access Point Cluster represents a collection of access points originating from the same physical routing object.
 
-An Access Point Cluster is a collection of access points that originate from the same physical object.
+<div align="center">
+<img src="images/connectivity_handling.png" width="800">
+</div>
 
-Examples include:
+<p align="center">
+<b>Figure 5:</b> Connectivity Handling using AP and APC
+</p>
 
-A pin shape
-An upper-layer guide
-A lower-layer segment
+### Observation
 
-Grouping access points improves routing flexibility and connectivity optimization.
+Access Points provide flexible routing entry and exit locations, improving connectivity and reducing routing complexity.
 
-Connectivity Handling
+---
 
-The router selects appropriate access points to establish reliable electrical connections while minimizing routing complexity.
+# Routing Topology Optimization
 
-Routing Topology Optimization
+After connectivity is established, routing topology must be optimized.
 
-After connectivity has been established, the routing topology must be optimized.
+The optimization process aims to minimize:
 
-The objective is to minimize:
+* Total wirelength
+* Via count
+* Congestion
+* Signal delay
 
-Total wirelength
-Via count
-Routing congestion
-Signal delay
+Many routing engines use graph-based techniques such as Minimum Spanning Trees (MSTs) to achieve efficient connectivity.
 
-Many routing engines employ graph-based optimization techniques such as Minimum Spanning Trees (MSTs) to determine efficient routing structures.
+<div align="center">
+<img src="images/routing_topology_algorithm.png" width="700">
+</div>
 
-Routing Topology Algorithm
+<p align="center">
+<b>Figure 6:</b> Routing Topology Optimization Algorithm
+</p>
 
-The optimization stage determines how routing resources are shared among different terminals belonging to the same net.
+### Observation
 
-Design Rule Checking (DRC)
+Topology optimization improves routing efficiency while reducing routing resources and timing degradation.
 
-Once routing is completed, the design must be verified against fabrication constraints.
+---
+
+# Design Rule Checking (DRC)
+
+After routing completion, the layout must be validated against fabrication constraints.
 
 A DRC-clean design is mandatory before tapeout.
 
-Important Wire Rules
-Wire Width
+## Important Wire Rules
+
+### Wire Width
 
 Defines the minimum allowable width of a metal segment.
 
-Insufficient width can increase resistance and manufacturing defects.
-
-Wire Spacing
+### Wire Spacing
 
 Defines the minimum separation between neighboring wires.
 
-Violations may cause shorts or signal coupling.
-
-Wire Pitch
+### Wire Pitch
 
 Represents the center-to-center distance between adjacent routing tracks.
 
-Pitch directly affects routing density.
+## Additional Via Rules
 
-Additional Via Rules
+### Via Width
 
-Routing introduces vertical interconnects through vias.
+Controls via dimensions.
 
-Therefore two additional rules become important:
+### Via Spacing
 
-Via Width
+Defines minimum separation between neighboring vias.
 
-Controls the physical dimensions of a via.
+## Common DRC Violations
 
-Via Spacing
+* Signal Shorts
+* Spacing Violations
+* Via Violations
 
-Defines the minimum distance between neighboring vias.
+<div align="center">
+<img src="images/drc_clean.png" width="900">
+</div>
 
-Common DRC Violations
-Signal Short
+<p align="center">
+<b>Figure 7:</b> DRC Clean Routed Layout
+</p>
 
-Occurs when two unrelated nets become electrically connected.
+### Observation
 
-Spacing Violation
+A DRC-clean layout guarantees compliance with manufacturing constraints and significantly improves fabrication reliability.
 
-Occurs when wires are placed too close together.
+---
 
-Via Violation
+# Parasitic Extraction
 
-Occurs when via dimensions or spacing fail design rule requirements.
+Physical interconnects introduce unavoidable parasitic effects that influence circuit behavior.
 
-DRC Clean Layout
+## Sources of Parasitics
 
-The final routed design must satisfy all spacing, width, pitch, and via constraints before fabrication.
+### Parasitic Resistance
 
-Parasitic Extraction
+Caused by finite metal conductivity.
 
-Even after routing is completed, the wires themselves introduce unwanted electrical effects.
+### Parasitic Capacitance
 
-These effects are known as parasitics.
+Generated between wires and substrate.
 
-Sources of Parasitics
-Parasitic Resistance
+### Coupling Capacitance
 
-Created by the finite conductivity of metal interconnects.
+Occurs between adjacent signal nets.
 
-Parasitic Capacitance
+## Importance of Extraction
 
-Generated between neighboring wires and between wires and substrate.
+Parasitic extraction enables:
 
-Coupling Capacitance
+* Accurate delay estimation
+* Signal integrity analysis
+* Power estimation
+* Signoff timing verification
 
-Occurs when adjacent nets influence each other.
+<div align="center">
+<img src="images/parasitic_extraction.png" width="900">
+</div>
 
-Importance of Extraction
+<p align="center">
+<b>Figure 8:</b> Extracted RC Network after Routing
+</p>
 
-Parasitic extraction is performed to:
+### Observation
 
-Estimate realistic delays
-Evaluate signal integrity
-Analyze power consumption
-Improve timing accuracy
+The extracted RC network provides a realistic representation of interconnect behavior and forms the basis of post-route timing analysis.
 
-Without extraction, timing analysis would be overly optimistic and inaccurate.
+---
 
-Extracted Parasitic Network
+# Key Learnings
 
-The extracted RC network provides a more realistic representation of the routed design and is later used during signoff timing analysis.
+* Routing converts logical connectivity into physical metal interconnects.
+* Lee's Algorithm demonstrates shortest-path routing concepts.
+* Global routing generates routing guides for detailed routing.
+* TritonRoute performs DRC-aware detailed routing.
+* Access Points improve connectivity flexibility.
+* DRC verification ensures manufacturability.
+* Parasitic extraction models real interconnect behavior for accurate signoff analysis.
 
-Key Takeaways
-Routing converts placement information into manufacturable metal interconnections.
-Lee's Algorithm provides the foundation for maze-based path finding.
-Global routing creates routing guides while detailed routing generates exact wire geometries.
-TritonRoute performs detailed routing while ensuring connectivity and design rule compliance.
-Access Points and Access Point Clusters improve routing flexibility.
-DRC verification ensures manufacturability.
-Parasitic extraction models real interconnect behavior for accurate timing analysis.
+---
+
+# Conclusion
+
+Routing represents the stage where logical connectivity becomes physical reality. Through global routing, detailed routing, DRC verification, and parasitic extraction, the design transitions from a placed netlist into a manufacturable silicon implementation. TritonRoute plays a critical role in achieving routing correctness while maintaining design rule compliance and manufacturability. The extracted parasitic network further enables accurate timing analysis, ensuring that the final design is both functionally correct and fabrication ready.
