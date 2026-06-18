@@ -8,7 +8,6 @@ The clock network is often referred to as the *heartbeat of a digital system* be
 
 This session focused on Power-Aware Clock Tree Synthesis, delay modeling, clock buffering, clock shielding, crosstalk effects, setup and hold analysis, clock skew, and timing uncertainty.
 
----
 
 # Power-Aware Clock Tree Synthesis
 
@@ -39,7 +38,6 @@ Y = EN × CLK
 
 When `EN = 0`, clock transitions are blocked, preventing unnecessary power consumption.
 
----
 
 ## Clock Gating Using OR Logic
 
@@ -69,8 +67,6 @@ When `EN = 1`, the output remains HIGH irrespective of clock transitions.
 * Reduces heat dissipation
 * Extends battery life in portable devices
 
----
-
 <p align="center">
   <img src="images/power_aware_cts.png" width="800">
 </p>
@@ -78,7 +74,6 @@ When `EN = 1`, the output remains HIGH irrespective of clock transitions.
 <p align="center">
   <b>Figure 1:</b> power_aware_cts
 </p>
----
 
 # Delay Tables and Timing Models
 
@@ -107,15 +102,13 @@ The CTS engine uses these delay tables for:
 * Timing optimization
 * Static Timing Analysis
 
----
+<p align="center">
+  <img src="images/delay_table.png" width="800">
+</p>
 
-## Screenshot
-
-```markdown
-![Delay Table](images/delay_table.png)
-```
-
----
+<p align="center">
+  <b>Figure 2:</b> delay_table
+</p>
 
 # Clock Tree Synthesis (CTS)
 
@@ -170,15 +163,13 @@ LoadC = C3 + C4
 
 Since Node B and Node C drive identical loads, their delays become nearly equal, helping achieve low clock skew.
 
----
+<p align="center">
+  <img src="images/cts_buffer_tree.png" width="800">
+</p>
 
-## Screenshot
-
-```markdown
-![CTS Buffer Tree](images/cts_buffer_tree.png)
-```
-
----
+<p align="center">
+  <b>Figure 3:</b> cts_buffer_tree
+</p>
 
 # H-Tree Clock Distribution
 
@@ -233,15 +224,14 @@ To overcome these issues, buffers are inserted into the clock path.
 * Drives larger fanout loads
 * Improves clock quality
 
----
 
-## Screenshot
+<p align="center">
+  <img src="images/clock_buffering.png" width="800">
+</p>
 
-```markdown
-![Clock Buffering](images/buffering.png)
-```
-
----
+<p align="center">
+  <b>Figure 4:</b> clock_buffering
+</p>
 
 # Clock Net Shielding
 
@@ -268,15 +258,14 @@ and routed alongside the clock net.
 * Minimizes delay variation
 * Enhances timing predictability
 
----
 
-## Screenshot
+<p align="center">
+  <img src="images/clock_shielding.png" width="800">
+</p>
 
-```markdown
-![Clock Shielding](images/shielding.png)
-```
-
----
+<p align="center">
+  <b>Figure 5:</b> clock_shielding
+</p>
 
 # Glitches and Their Effects
 
@@ -326,15 +315,13 @@ Where:
 
 This additional delay can affect clock arrival times and increase clock skew.
 
----
+<p align="center">
+  <img src="images/h_tree_clock_distribution.png" width="800">
+</p>
 
-## Screenshot
-
-```markdown
-![Crosstalk](images/crosstalk.png)
-```
-
----
+<p align="center">
+  <b>Figure 6:</b> h_tree_clock_distribution
+</p>
 
 # Clock Skew
 
@@ -414,15 +401,15 @@ Where:
 
 If this condition is violated, the flip-flop may capture incorrect data.
 
----
 
-## Screenshot
+<p align="center">
+  <img src="images/setup_timing_analysis.png" width="800">
+</p>
 
-```markdown
-![Setup Timing Analysis](images/setup_timing.png)
-```
+<p align="center">
+  <b>Figure 7:</b> setup_timing_analysis
+</p>
 
----
 
 # Clock Jitter and Timing Uncertainty
 
@@ -509,29 +496,14 @@ Slack ≥ 0
 
 If slack becomes negative, a hold violation occurs.
 
----
+<p align="center">
+  <img src="images/hold_timing_analysis.png" width="800">
+</p>
 
-## Screenshot
+<p align="center">
+  <b>Figure 8:</b> hold_timing_analysis
+</p>
 
-```markdown
-![Hold Timing Analysis](images/hold_timing.png)
-```
-
----
-
-# Key Learnings
-
-* Pre-layout timing analysis uses ideal clocks before CTS implementation.
-* Clock Tree Synthesis distributes clock signals with balanced delays.
-* Power-aware CTS reduces unnecessary clock switching activity.
-* Delay tables are fundamental to timing analysis.
-* Buffering compensates for RC delay in long interconnects.
-* Shielding protects clock nets from noise and crosstalk.
-* Crosstalk introduces delta delay and increases skew.
-* Setup and hold analyses ensure reliable operation.
-* Positive slack indicates successful timing closure.
-
----
 
 # Conclusion
 
