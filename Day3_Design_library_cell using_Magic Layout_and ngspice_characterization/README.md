@@ -137,53 +137,32 @@ Mathematical Analysis of Switching Threshold
 
 The switching threshold can be derived using the current balance equations of NMOS and PMOS devices.
 
-The switching threshold is represented as:
+The switching threshold voltage is expressed as:
 
-V
-m
-	​
+Vm = (R × VDD) / (1 + R)
 
-=
-1+R
-R⋅V
-DD
-	​
+where,
 
-	​
+R = (Kp × Vdsatp) / (Kn × Vdsatn)
+Parameters
+Symbol	Description
+Vm	Switching Threshold Voltage
+VDD	Supply Voltage
+Kp	PMOS Process Transconductance Parameter
+Kn	NMOS Process Transconductance Parameter
+Vdsatp	PMOS Saturation Voltage
+Vdsatn	NMOS Saturation Voltage
+R	PMOS-to-NMOS Drive Strength Ratio
+Factors Affecting R
 
+The value of R depends on:
 
-Where:
-
-R=
-K
-n
-	​
-
-V
-dsatn
-	​
-
-K
-p
-	​
-
-V
-dsatp
-	​
-
-	​
-
-
-The ratio R depends on:
-
-NMOS width-to-length ratio
-PMOS width-to-length ratio
-Mobility ratio
-Saturation voltages
-Process parameters
-
+NMOS Width-to-Length Ratio (W/L)
+PMOS Width-to-Length Ratio (W/L)
+Carrier Mobility Ratio
+Saturation Voltages
+Technology Process Parameters
 ---
-
 # Propagation Delay Analysis
 
 Propagation delay determines how quickly the inverter can respond to changes in the input signal.
