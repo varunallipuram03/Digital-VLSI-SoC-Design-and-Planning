@@ -125,24 +125,54 @@ The switching threshold can be derived using the current balance equations of NM
 <p align="center">
   <b>Figure 3:</b> vm_equations
 </p>
+Mathematical Analysis of Switching Threshold
 
-## Threshold Voltage Equation
+The switching threshold can be derived using the current balance equations of NMOS and PMOS devices.
 
-The threshold voltage considering the body effect is expressed as:
+The switching threshold is represented as:
 
-```text
-Vt = Vt0 + γ [ √(|−2ϕf + VSB|) − √(|−2ϕf|) ]
-```
+V
+m
+	​
 
-### Parameters
+=
+1+R
+R⋅V
+DD
+	​
 
-| Symbol | Description                        |
-| ------ | ---------------------------------- |
-| Vt     | Threshold voltage with body effect |
-| Vt0    | Threshold voltage when VSB = 0     |
-| γ      | Body effect coefficient            |
-| ϕf     | Fermi potential                    |
-| VSB    | Source-to-body voltage             |
+	​
+
+
+Where:
+
+R=
+K
+n
+	​
+
+V
+dsatn
+	​
+
+K
+p
+	​
+
+V
+dsatp
+	​
+
+	​
+
+
+The ratio R depends on:
+
+NMOS width-to-length ratio
+PMOS width-to-length ratio
+Mobility ratio
+Saturation voltages
+Process parameters
 
 ---
 
@@ -197,22 +227,21 @@ As the source-to-body voltage increases, the threshold voltage also increases.
 
 ## Threshold Voltage Equation
 
-$$
-V_t = V_{t0} + \gamma
-\left(
-\sqrt{| -2\phi_f + V_{SB}|}
----------------------------
+The threshold voltage considering the body effect is expressed as:
 
-\sqrt{| -2\phi_f|}
-\right)
-$$
+```text
+Vt = Vt0 + γ [ √(|−2ϕf + VSB|) − √(|−2ϕf|) ]
+```
 
-| Parameter | Description                     |
-| --------- | ------------------------------- |
-| $V_{t0}$  | Threshold voltage at $V_{SB}=0$ |
-| $\gamma$  | Body effect coefficient         |
-| $\phi_f$  | Fermi potential                 |
-| $V_{SB}$  | Source-to-body voltage          |
+### Parameters
+
+| Symbol | Description                        |
+| ------ | ---------------------------------- |
+| Vt     | Threshold voltage with body effect |
+| Vt0    | Threshold voltage when VSB = 0     |
+| γ      | Body effect coefficient            |
+| ϕf     | Fermi potential                    |
+| VSB    | Source-to-body voltage             |
 
 ### Observation
 
