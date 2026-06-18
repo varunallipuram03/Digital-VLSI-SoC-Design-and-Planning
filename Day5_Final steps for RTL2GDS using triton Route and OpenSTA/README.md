@@ -1,4 +1,4 @@
-# Day 5: Routing, Design Rule Checking and Parasitic Extraction
+# Day 5 - Routing, Design Rule Checking and Parasitic Extraction
 
 # Overview
 
