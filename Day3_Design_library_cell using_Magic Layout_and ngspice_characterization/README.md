@@ -13,34 +13,36 @@ The robustness of an inverter is evaluated using its Voltage Transfer Characteri
 
 ---
 
-# Switching Threshold Voltage (Vm)
+## Switching Threshold Voltage (Vm)
 
-The switching threshold voltage (Vm) is defined as the point where:
+The switching threshold voltage (**Vm**) is defined as the point where the input voltage becomes equal to the output voltage.
 
-$$
-V_{in}=V_{out}=V_m
-$$
+```text
+Vin = Vout = Vm
+```
 
-At this point, both NMOS and PMOS transistors conduct simultaneously.
+At this operating point, both the NMOS and PMOS transistors conduct simultaneously and the inverter is in its transition region.
 
-The drain currents satisfy:
+The drain currents satisfy the condition:
 
-$$
-I_{DSP} = -I_{DSN}
-$$
+```text
+IDSP = −IDSN
+```
 
-Vm plays an important role in determining:
+### Significance of Switching Threshold Voltage
 
-Noise Margins
-Switching Speed
-Static Power Consumption
-Inverter Robustness
-Vm plays an important role in determining:
+The switching threshold voltage plays a crucial role in determining:
 
 * Noise Margins
 * Switching Speed
 * Static Power Consumption
 * Inverter Robustness
+* Overall CMOS Inverter Performance
+
+### Observation
+
+A balanced CMOS inverter typically has its switching threshold near the midpoint of the supply voltage. Any change in NMOS or PMOS sizing alters the drive strength ratio between the transistors, causing the switching threshold voltage to shift accordingly.
+
 
 ---
 
