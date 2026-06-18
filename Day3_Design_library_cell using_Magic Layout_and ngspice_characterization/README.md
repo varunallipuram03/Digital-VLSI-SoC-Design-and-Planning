@@ -126,29 +126,23 @@ The switching threshold can be derived using the current balance equations of NM
   <b>Figure 3:</b> vm_equations
 </p>
 
-The switching threshold is represented as:
+## Threshold Voltage Equation
 
-$$
-V_m = \frac{R \cdot V_{DD}}{1+R}
-$$
+The threshold voltage considering the body effect is expressed as:
 
-Where:
+```text
+Vt = Vt0 + γ [ √(|−2ϕf + VSB|) − √(|−2ϕf|) ]
+```
 
-$$
-R=\frac{K_pV_{dsatp}}{K_nV_{dsatn}}
-$$
+### Parameters
 
-The ratio **R** depends on:
-
-* NMOS width-to-length ratio
-* PMOS width-to-length ratio
-* Mobility ratio
-* Saturation voltages
-* Process parameters
-
-### Observation
-
-Increasing the PMOS width increases **R**, thereby increasing the switching threshold voltage.
+| Symbol | Description                        |
+| ------ | ---------------------------------- |
+| Vt     | Threshold voltage with body effect |
+| Vt0    | Threshold voltage when VSB = 0     |
+| γ      | Body effect coefficient            |
+| ϕf     | Fermi potential                    |
+| VSB    | Source-to-body voltage             |
 
 ---
 
