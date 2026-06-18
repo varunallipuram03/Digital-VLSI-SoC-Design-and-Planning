@@ -16,22 +16,31 @@ The clock network contributes significantly to the total dynamic power consumpti
 
 To reduce unnecessary switching activity, **clock gating** techniques are used. Clock gating enables the clock signal only when a particular logic block is active.
 
-## Clock Gating Logic
+Clock Gating Using AND Logic
 
-For an AND-gated clock:
+The clock is propagated only when the enable signal is active.
 
-```text
+Logic Equation
 Y = EN × CLK
-```
+Truth Table
+EN	CLK	Y
+0	0	0
+0	1	0
+1	0	0
+1	1	1
+Observation
 
-Where:
+When EN = 0, clock transitions are blocked, preventing unnecessary power consumption.
 
-* `EN` = Enable Signal
-* `CLK` = Clock Signal
-* `Y` = Gated Clock Output
-
-When the enable signal is LOW, the clock is blocked and no switching occurs in the downstream logic.
-
+Clock Gating Using OR Logic
+Logic Equation
+Y = EN + CLK
+Truth Table
+EN	CLK	Y
+0	0	0
+0	1	1
+1	0	1
+1	1	1
 ### Advantages of Power-Aware CTS
 
 * Reduces dynamic power consumption
