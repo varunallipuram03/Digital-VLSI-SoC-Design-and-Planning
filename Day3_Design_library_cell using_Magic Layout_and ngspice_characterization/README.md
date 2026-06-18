@@ -15,7 +15,7 @@ The robustness of an inverter is evaluated using its Voltage Transfer Characteri
 
 # Switching Threshold Voltage (Vm)
 
-The switching threshold voltage (**Vm**) is defined as the point where:
+The switching threshold voltage (Vm) is defined as the point where:
 
 $$
 V_{in}=V_{out}=V_m
@@ -29,6 +29,12 @@ $$
 I_{DSP} = -I_{DSN}
 $$
 
+Vm plays an important role in determining:
+
+Noise Margins
+Switching Speed
+Static Power Consumption
+Inverter Robustness
 Vm plays an important role in determining:
 
 * Noise Margins
