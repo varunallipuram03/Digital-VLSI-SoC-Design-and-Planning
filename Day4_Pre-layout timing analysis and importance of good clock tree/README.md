@@ -1,4 +1,4 @@
-# Day 4: Pre-layout Timing Analysis and Importance of Good Clock Tree
+# Day 4 - Pre-layout Timing Analysis and Importance of Good Clock Tree
 
 ## Overview
 
