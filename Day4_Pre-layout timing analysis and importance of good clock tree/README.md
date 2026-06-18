@@ -71,12 +71,13 @@ When `EN = 1`, the output remains HIGH irrespective of clock transitions.
 
 ---
 
-## Screenshot
+<p align="center">
+  <img src="images/power_aware_cts.png" width="800">
+</p>
 
-```markdown
-![Power Aware CTS](images/power_aware_cts.png)
-```
-
+<p align="center">
+  <b>Figure 1:</b> power_aware_cts
+</p>
 ---
 
 # Delay Tables and Timing Models
