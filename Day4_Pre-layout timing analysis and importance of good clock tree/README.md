@@ -1,4 +1,4 @@
-# Day 4 - Clock Tree Synthesis (CTS), Clock Integrity and Static Timing Analysis
+# Day4_Pre-layout timing analysis and importance of good clock tree
 
 ## Introduction
 
