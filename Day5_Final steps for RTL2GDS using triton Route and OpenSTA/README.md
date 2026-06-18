@@ -1,26 +1,5 @@
 # Day 5: Routing, Design Rule Checking and Parasitic Extraction
 
-## Table of Contents
-
-* [Overview](#overview)
-* [Understanding Routing in Physical Design](#understanding-routing-in-physical-design)
-* [Maze Routing using Lee's Algorithm](#maze-routing-using-lees-algorithm)
-* [Routing Stages](#routing-stages)
-
-  * [Global Routing](#global-routing)
-  * [Detailed Routing](#detailed-routing)
-* [Detailed Routing using TritonRoute](#detailed-routing-using-tritonroute)
-* [Preprocessed Route Guides](#preprocessed-route-guides)
-* [Inter-Guide Connectivity](#inter-guide-connectivity)
-* [Access Points and Connectivity Handling](#access-points-and-connectivity-handling)
-* [Routing Topology Optimization](#routing-topology-optimization)
-* [Design Rule Checking (DRC)](#design-rule-checking-drc)
-* [Parasitic Extraction](#parasitic-extraction)
-* [Key Learnings](#key-learnings)
-* [Conclusion](#conclusion)
-
----
-
 # Overview
 
 After placement and Clock Tree Synthesis (CTS), the design enters one of the most critical stages of the physical design flow: **Routing**. The objective of routing is to establish reliable electrical connections between standard cells, macros, I/O pins, and clock network elements while satisfying all manufacturing and design constraints.
@@ -164,14 +143,6 @@ Ensures complete connectivity between all routing segments and pins.
 
 Iteratively resolves routing violations until a clean solution is achieved.
 
-<div align="center">
-<img src="images/tritonroute_overview.png" width="800">
-</div>
-
-<p align="center">
-<b>Figure 3:</b> TritonRoute Detailed Routing Architecture
-</p>
-
 ### Key Features
 
 * Initial detailed routing
@@ -193,14 +164,6 @@ Before detailed routing begins, routing guides generated during global routing u
 3. Bridging
 
 These operations simplify routing regions and improve detailed routing efficiency.
-
-<div align="center">
-<img src="images/preprocessed_route_guides.png" width="800">
-</div>
-
-<p align="center">
-<b>Figure 4:</b> Preprocessed Route Guides
-</p>
 
 ## Requirements of Preprocessed Guides
 
@@ -247,14 +210,6 @@ An Access Point is an on-grid location used to connect:
 
 An Access Point Cluster represents a collection of access points originating from the same physical routing object.
 
-<div align="center">
-<img src="images/connectivity_handling.png" width="800">
-</div>
-
-<p align="center">
-<b>Figure 5:</b> Connectivity Handling using AP and APC
-</p>
-
 ### Observation
 
 Access Points provide flexible routing entry and exit locations, improving connectivity and reducing routing complexity.
@@ -273,14 +228,6 @@ The optimization process aims to minimize:
 * Signal delay
 
 Many routing engines use graph-based techniques such as Minimum Spanning Trees (MSTs) to achieve efficient connectivity.
-
-<div align="center">
-<img src="images/routing_topology_algorithm.png" width="700">
-</div>
-
-<p align="center">
-<b>Figure 6:</b> Routing Topology Optimization Algorithm
-</p>
 
 ### Observation
 
@@ -329,7 +276,7 @@ Defines minimum separation between neighboring vias.
 </div>
 
 <p align="center">
-<b>Figure 7:</b> DRC Clean Routed Layout
+<b>Figure 3:</b> DRC Clean Routed Layout
 </p>
 
 ### Observation
@@ -370,7 +317,7 @@ Parasitic extraction enables:
 </div>
 
 <p align="center">
-<b>Figure 8:</b> Extracted RC Network after Routing
+<b>Figure 4:</b> Extracted RC Network after Routing
 </p>
 
 ### Observation
