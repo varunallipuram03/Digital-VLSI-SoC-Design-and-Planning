@@ -41,10 +41,13 @@ Floorplanning is the first stage of physical design where the physical dimension
 
 A good floorplan ensures efficient utilization of silicon area while providing sufficient routing resources and power distribution paths.
 
-### Floorplan Structure
-```markdown
-![Floorplan Structure](images/floorplan_structure.png)
-```
+<p align="center">
+  <img src="images/picorv32a.floorplan.def.png" width="800">
+</p>
+
+<p align="center">
+  <b>Figure 2:</b> picorv32a.floorplan_structure
+</p>
 
 ### Importance of Floorplanning
 
@@ -161,7 +164,7 @@ A bad floorplan often leads to implementation challenges during placement and ro
 </p>
 
 <p align="center">
-  </b> Figure 2: Comparison between a Good Floorplan and a Bad Floorplan
+  </b> Figure 3: Comparison between a Good Floorplan and a Bad Floorplan
 </p>
 
 ### Key Learning Outcome
@@ -181,7 +184,13 @@ Examples include:
 
 ### Macro Placement
 The placement of these macros affects routing resources and timing performance across the entire chip.
+<p align="center">
+  <img src="images/picorv32a.placement.def.png" width="800">
+</p>
 
+<p align="center">
+  <b>Figure 4:</b> picorv32a.placement_structure
+</p>
 ---
 ## Decoupling Capacitors (Decap Cells)
 
@@ -222,7 +231,7 @@ The PDN is composed of several interconnected structures:
 </p>
 
 <p align="center">
-  <b>Figure 2:</b> power_planning
+  <b>Figure 5:</b> power_planning
 </p>
 ### Benefits of Proper Power Planning
 
@@ -254,7 +263,7 @@ A larger noise margin indicates a more robust and reliable digital system.
 </p>
 
 <p align="center">
-  <b>Figure 3:</b> noise_margin
+  <b>Figure 6:</b> noise_margin
 </p>
 ### Why Noise Margin Matters
 
@@ -334,7 +343,7 @@ Before a standard cell can be included in a technology library, it must pass thr
 </p>
 
 <p align="center">
-  <b>Figure 4:</b> cell_design_flow
+  <b>Figure 7:</b> cell_design_flow
 </p>
 
 ### Inputs Required
@@ -382,7 +391,7 @@ A standard cell layout represents the physical realization of the transistor-lev
   <img src="images/cell_design_flow.png" width="800">
 </p>
 <p align="center">
-  <b>Figure 5:</b> cell_design_flow
+  <b>Figure 8:</b> cell_design_flow
 </p>
 
 Pin accessibility is an important consideration because it directly affects placement flexibility, routing quality, and timing closure.
@@ -401,7 +410,7 @@ Characterization is the process of extracting electrical information that descri
 </p>
 
 <p align="center">
-  <b>Figure 6:</b> characterization_flow
+  <b>Figure 9:</b> characterization_flow
 </p>
 
 ### Characterization Outputs
@@ -436,7 +445,7 @@ The extracted timing information is later used by Static Timing Analysis (STA) t
 </p>
 
 <p align="center">
-  <b>Figure 7:</b> timing_thresholds
+  <b>Figure 10:</b> timing_thresholds
 </p>
 Timing measurements are typically calculated using predefined voltage thresholds such as 20%, 50%, and 80% of the supply voltage.
 
@@ -447,7 +456,7 @@ Timing measurements are typically calculated using predefined voltage thresholds
 </p>
 
 <p align="center">
-  <b>Figure 8:</b> propagation_delay
+  <b>Figure 11:</b> propagation_delay
 </p>
 Propagation delay is calculated as the difference between the output threshold crossing time and the corresponding input threshold crossing time.
 
